@@ -4,7 +4,8 @@
   "description": "The Making Known, an audio guide by Benny Nemer",
   "main": "dist/index.js",
   "scripts": {
-    "test": "elm-test"
+    "test": "elm-test",
+    "start": "parcel ./src/index.html"
   },
   "repository": {
     "type": "git",
