@@ -1,0 +1,19 @@
+{
+  "name": "making-known",
+  "version": "1.0.0",
+  "description": "The Making Known, an audio guide by Benny Nemer",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "elm-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baffalop/making-known.git"
+  },
+  "author": "Nikita Gaidakov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/baffalop/making-known/issues"
+  },
+  "homepage": "https://github.com/baffalop/making-known#readme"
+}
