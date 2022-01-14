@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "The Making Known, an audio guide by Benny Nemer",
   "main": "dist/index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "parcel ./src/index.html"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/baffalop/making-known.git"
@@ -14,8 +16,8 @@
     "url": "https://github.com/baffalop/making-known/issues"
   },
   "homepage": "https://github.com/baffalop/making-known#readme",
-  "dependencies": {
+  "devDependencies": {
     "parcel": "^2.2.0",
-    "parcel-plugin-svelte": "^4.0.9"
+    "parcel-transformer-svelte": "^1.2.3"
   }
 }
