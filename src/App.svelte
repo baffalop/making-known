@@ -21,6 +21,18 @@
   height: 100%;
 }
 
+@font-face {
+  font-family: 'GaramondBT';
+  src: url(font/OriginalGaramondBT-Roman.otf);
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GaramondBT';
+  src: url(font/OriginalGaramondBT-Italic.otf);
+  font-style: italic;
+}
+
 main {
   text-align: center;
 }
