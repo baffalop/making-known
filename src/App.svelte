@@ -3,14 +3,22 @@
 
 <main>
   <header class="App-header">
-    <p>Edit <code>src/App.svelte</code> and save to reload.</p>
+    <h1>The Making Known</h1>
   </header>
 </main>
 
 <style>
 :global(body) {
+  -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
+  -webkit-user-select: text;
+
+  background: linear-gradient(to bottom, #302d2c, #6e7172 50%);
+  color: #efcd89;
+  font-family: 'GaramondBT', serif, system-ui, -apple-system, -apple-system-font;
+  font-size: calc(14pt + 0.35vw);
+
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
 }
 
 main {
@@ -18,7 +26,7 @@ main {
 }
 
 main code {
-  background: #0002;
+  background: #a6241d;
   padding: 4px 8px;
   border-radius: 4px;
 }
@@ -27,9 +35,8 @@ main p {
   margin: 0.4rem;
 }
 
-main header {
-  background-color: #f9f6f6;
-  color: #333;
+header {
+  font-style: italic;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
