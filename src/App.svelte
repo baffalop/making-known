@@ -8,31 +8,6 @@
 </main>
 
 <style>
-:global(body) {
-  -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
-  -webkit-user-select: text;
-
-  background: linear-gradient(to bottom, #302d2c, #6e7172 50%);
-  color: #efcd89;
-  font-family: 'GaramondBT', serif, system-ui, -apple-system, -apple-system-font;
-  font-size: calc(14pt + 0.35vw);
-
-  margin: 0;
-  height: 100%;
-}
-
-@font-face {
-  font-family: 'GaramondBT';
-  src: url(font/OriginalGaramondBT-Roman.otf);
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'GaramondBT';
-  src: url(font/OriginalGaramondBT-Italic.otf);
-  font-style: italic;
-}
-
 main {
   text-align: center;
 }
