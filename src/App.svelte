@@ -5,11 +5,28 @@
   <header class="App-header">
     <h1>The Making Known</h1>
   </header>
+
+  <div>
+    <p>This is what I think of that</p>
+  </div>
 </main>
 
 <style>
 main {
   text-align: center;
+  height: 100vh;
+  overflow: auto;
+  scroll-snap-type: y mandatory;
+}
+
+main > * {
+  height: 100vh;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 main code {
@@ -24,11 +41,6 @@ main p {
 
 header {
   font-style: italic;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
 }
 </style>
