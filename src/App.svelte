@@ -2,8 +2,8 @@
   The <span on:click={ shuffle }><i>{ word }</i></span> making known
 </p>
 
-<script>
-const words = [
+<script lang="ts">
+const words: string[] = [
   'real',
   'incredible',
   'unbelievable',
@@ -11,7 +11,7 @@ const words = [
   'indefensible',
 ]
 
-let word = words[0]
+let word: string = words[0]
 
 function shuffle () {
   const i = Math.floor(Math.random() * words.length)

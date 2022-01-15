@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/baffalop/making-known#readme",
   "devDependencies": {
+    "babel": "^6.23.0",
     "parcel": "^2.2.0",
-    "parcel-transformer-svelte": "^1.2.3"
+    "parcel-transformer-svelte": "github:orlov-vo/parcel-transformer-svelte#pull/24/head",
+    "svelte-preprocess": "^4.10.1",
+    "typescript": "^4.5.4"
   }
 }
