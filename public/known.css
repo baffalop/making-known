@@ -2,7 +2,7 @@ body {
   -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
   -webkit-user-select: text;
 
-  background: fixed linear-gradient(to bottom, #302d2c, #6e7172 50%);
+  background: fixed linear-gradient(to bottom, #302d2c, #6e7172 30%);
   color: #efcd89;
 
   font-family: 'GaramondBT', serif, system-ui, -apple-system, -apple-system-font;
