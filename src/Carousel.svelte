@@ -1,9 +1,10 @@
 <script lang="ts">
 export let orientation: 'horizontal' | 'vertical'
 export let snap: boolean = true
+export let view: string
 </script>
 
-<div class="carousel { orientation }" class:snap>
+<div class="carousel {orientation} {view}" class:snap>
   <slot></slot>
 </div>
 
@@ -14,6 +15,8 @@ export let snap: boolean = true
   overflow: auto;
 
   display: flex;
+
+  transition: background 400ms;
 }
 
 .carousel.vertical {

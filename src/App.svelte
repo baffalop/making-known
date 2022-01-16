@@ -5,7 +5,7 @@ import { inview } from 'svelte-inview'
 let view: 'header' | 'menu' = 'header'
 </script>
 
-<Carousel orientation="vertical" class={view}>
+<Carousel orientation="vertical" {view}>
   <header use:inview={{ threshold: 0.5 }} on:enter={() => view = 'header'}>
     <h1>The Making Known</h1>
   </header>
@@ -16,12 +16,30 @@ let view: 'header' | 'menu' = 'header'
 </Carousel>
 
 <style>
-:global(body:has(.header)) {
+:global(.carousel) {
   background: linear-gradient(to bottom, #302d2c, #6e7172 50%);
 }
 
-:global(body:has(.menu)) {
+:global(.carousel:after) {
   background: #a6241d;
+  opacity: 0;
+
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 300ms ease-out;
+  z-index: 1;
+}
+
+:global(.carousel.menu:after) {
+  opacity: 1;
+}
+
+:global(.carousel *) {
+  z-index: 2;
 }
 
 main code {
