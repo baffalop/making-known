@@ -5,7 +5,8 @@
     "test": "web-test-runner \"src/**/*.test.ts\""
   },
   "dependencies": {
-    "svelte": "^3.37.0"
+    "svelte": "^3.37.0",
+    "svelte-inview": "^2.1.1"
   },
   "devDependencies": {
     "@snowpack/plugin-dotenv": "^2.2.0",
