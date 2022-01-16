@@ -1,34 +1,18 @@
 <script lang="ts">
+import Carousel from './Carousel.svelte'
 </script>
 
-<main>
-  <header class="App-header">
+<Carousel orientation="vertical">
+  <header>
     <h1>The Making Known</h1>
   </header>
 
   <div>
     <p>This is what I think of that</p>
   </div>
-</main>
+</Carousel>
 
 <style>
-main {
-  text-align: center;
-  height: 100vh;
-  overflow: auto;
-  scroll-snap-type: y mandatory;
-}
-
-main > * {
-  height: 100vh;
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 main code {
   background: #a6241d;
   padding: 4px 8px;
