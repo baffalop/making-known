@@ -1,5 +1,4 @@
 <script lang="ts">
-import Carousel from './Carousel.svelte'
 import { inview } from 'svelte-inview'
 
 const inviewHalf = { threshold: 0.5 }
@@ -15,24 +14,59 @@ function viewMenu(): void {
 }
 </script>
 
-<Carousel orientation="vertical" {view}>
-  <header class="centred" use:inview={inviewHalf} on:enter={viewHeader}>
+<main class="carousel snap vertical view-{view}">
+  <header class="centred slide" use:inview={inviewHalf} on:enter={viewHeader}>
     <h1>The Making Known</h1>
   </header>
 
-  <Carousel orientation="horizontal">
-    <div class="centred" use:inview={inviewHalf} on:enter={viewMenu}>
+  <div class="slide carousel snap horizontal">
+    <div class="centred slide" use:inview={inviewHalf} on:enter={viewMenu}>
       <p>This is what I think of that</p>
     </div>
 
-    <div class="centred" use:inview={inviewHalf} on:enter={viewMenu}>
+    <div class="centred slide" use:inview={inviewHalf} on:enter={viewMenu}>
       <p>And another</p>
     </div>
-  </Carousel>
-</Carousel>
+  </div>
+</main>
 
 <style>
-:global(.carousel:after) {
+.centred {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel {
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  display: flex;
+}
+
+.carousel.vertical {
+  scroll-snap-type: y mandatory;
+  flex-direction: column;
+}
+
+.carousel.horizontal {
+  scroll-snap-type: x mandatory;
+  flex-direction: row;
+}
+
+.slide {
+  flex: none;
+  height: 100%;
+  width: 100%;
+}
+
+.carousel.snap > .slide {
+  scroll-snap-stop: always;
+  scroll-snap-align: center;
+}
+
+main:after {
   background: #a6241d;
   opacity: 0;
 
@@ -43,32 +77,11 @@ function viewMenu(): void {
   width: 100%;
   height: 100%;
   transition: opacity 300ms ease-out;
-  z-index: 1;
+  z-index: -1;
 }
 
-:global(.carousel.header:after) {
+main.view-header:after {
   opacity: 1;
-}
-
-:global(.carousel *) {
-  z-index: 2;
-}
-
-.centred {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-main code {
-  background: #a6241d;
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-
-main p {
-  margin: 0.4rem;
 }
 
 header {
