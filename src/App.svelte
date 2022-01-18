@@ -6,20 +6,22 @@ let view: 'header' | 'menu' = 'header'
 </script>
 
 <Carousel orientation="vertical" {view}>
-  <header use:inview={{ threshold: 0.5 }} on:enter={() => view = 'header'}>
+  <header class="centred" use:inview={{ threshold: 0.5 }} on:enter={ () => view = 'header' }>
     <h1>The Making Known</h1>
   </header>
 
-  <div use:inview={{ threshold: 0.5 }} on:enter={() => view = 'menu'}>
-    <p>This is what I think of that</p>
-  </div>
+  <Carousel orientation="horizontal">
+    <div class="centred" use:inview={{ threshold: 0.5 }} on:enter={ () => view = 'menu' }>
+      <p>This is what I think of that</p>
+    </div>
+
+    <div class="centred" use:inview={{ threshold: 0.5 }} on:enter={ () => view = 'menu' }>
+      <p>And another</p>
+    </div>
+  </Carousel>
 </Carousel>
 
 <style>
-:global(.carousel) {
-  background: linear-gradient(to bottom, #302d2c, #6e7172 50%);
-}
-
 :global(.carousel:after) {
   background: #a6241d;
   opacity: 0;
@@ -34,12 +36,19 @@ let view: 'header' | 'menu' = 'header'
   z-index: 1;
 }
 
-:global(.carousel.menu:after) {
+:global(.carousel.header:after) {
   opacity: 1;
 }
 
 :global(.carousel *) {
   z-index: 2;
+}
+
+.centred {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 main code {

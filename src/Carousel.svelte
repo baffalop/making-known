@@ -33,11 +33,6 @@ export let view: string
   flex: none;
   height: 100%;
   width: 100%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .carousel.snap > :global(*) {
