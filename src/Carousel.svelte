@@ -15,8 +15,6 @@ export let view: string
   overflow: auto;
 
   display: flex;
-
-  transition: background 400ms;
 }
 
 .carousel.vertical {
