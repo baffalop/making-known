@@ -11,17 +11,9 @@ enum View {
 
 let view: View = View.Header
 
-function viewHeader(): void {
-  view = View.Header
-}
-
-function viewMenu(): void {
-  view = View.Menu
-}
-
-function viewPlayer(): void {
-  view = View.Player
-}
+const viewHeader = () => view = View.Header
+const viewMenu = () => view = View.Menu
+const viewPlayer = () => view = View.Player
 </script>
 
 <main class="carousel snap vertical view-{view}">
