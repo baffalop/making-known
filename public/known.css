@@ -13,10 +13,6 @@ body {
   width: 100%;
 }
 
-/**::-webkit-scrollbar {*/
-/*  display: none;*/
-/*}*/
-
 @font-face {
   font-family: 'GaramondBT';
   src: url(font/OriginalGaramondBT-Roman.otf);
