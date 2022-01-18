@@ -2,20 +2,30 @@
 import Carousel from './Carousel.svelte'
 import { inview } from 'svelte-inview'
 
+const inviewHalf = { threshold: 0.5 }
+
 let view: 'header' | 'menu' = 'header'
+
+function viewHeader(): void {
+  view = 'header'
+}
+
+function viewMenu(): void {
+  view = 'menu'
+}
 </script>
 
 <Carousel orientation="vertical" {view}>
-  <header class="centred" use:inview={{ threshold: 0.5 }} on:enter={ () => view = 'header' }>
+  <header class="centred" use:inview={inviewHalf} on:enter={viewHeader}>
     <h1>The Making Known</h1>
   </header>
 
   <Carousel orientation="horizontal">
-    <div class="centred" use:inview={{ threshold: 0.5 }} on:enter={ () => view = 'menu' }>
+    <div class="centred" use:inview={inviewHalf} on:enter={viewMenu}>
       <p>This is what I think of that</p>
     </div>
 
-    <div class="centred" use:inview={{ threshold: 0.5 }} on:enter={ () => view = 'menu' }>
+    <div class="centred" use:inview={inviewHalf} on:enter={viewMenu}>
       <p>And another</p>
     </div>
   </Carousel>
