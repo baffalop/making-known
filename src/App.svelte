@@ -1,7 +1,10 @@
 <script lang="ts">
 import { inview } from 'svelte-inview'
+import { fade } from 'svelte/transition'
+import { cubicOut } from 'svelte/easing'
 
 const inviewHalf = { threshold: 0.5 }
+const fadeParams = { duration: 500, easing: cubicOut }
 
 enum View {
   Header = 'header',
@@ -17,8 +20,11 @@ const viewPlayer = () => view = View.Player
 </script>
 
 <main class="carousel snap vertical view-{view}">
-  <div class="background red" class:show={view === View.Header}></div>
-  <div class="background grey" class:show={view === View.Player}></div>
+  {#if view === View.Header}
+    <div class="background red" transition:fade={fadeParams}></div>
+  {:else if view === View.Player}
+    <div class="background grey" transition:fade={fadeParams}></div>
+  {/if}
 
   <header class="centred slide" use:inview={inviewHalf} on:enter={viewHeader}>
     <h1>The Making Known</h1>
@@ -78,9 +84,6 @@ const viewPlayer = () => view = View.Player
   width: 100%;
   height: 100%;
   z-index: -1;
-
-  opacity: 0;
-  transition: opacity 300ms ease-out;
 }
 
 .background.red {
@@ -89,14 +92,6 @@ const viewPlayer = () => view = View.Player
 
 .background.grey {
   background: linear-gradient(to right, #40444a, #6e7172 30%);
-}
-
-.background.show {
-  opacity: 1;
-}
-
-main.view-header:after {
-  opacity: 1;
 }
 
 header {
