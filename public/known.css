@@ -3,6 +3,7 @@ body {
   -webkit-user-select: text;
 
   color: #efcd89;
+  background: linear-gradient(to bottom, #302d2c, #6e7172 50%);
 
   font-family: 'GaramondBT', serif, system-ui, -apple-system, -apple-system-font;
   font-size: calc(14pt + 0.35vw);
