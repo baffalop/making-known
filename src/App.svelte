@@ -3,19 +3,30 @@ import { inview } from 'svelte-inview'
 
 const inviewHalf = { threshold: 0.5 }
 
-let view: 'header' | 'menu' = 'header'
+enum View {
+  Header = 'header',
+  Menu = 'menu',
+  Player = 'player',
+}
+
+let view: View = View.Header
 
 function viewHeader(): void {
-  view = 'header'
+  view = View.Header
 }
 
 function viewMenu(): void {
-  view = 'menu'
+  view = View.Menu
+}
+
+function viewPlayer(): void {
+  view = View.Player
 }
 </script>
 
 <main class="carousel snap vertical view-{view}">
-  <div class="background red" class:show={view === 'header'}></div>
+  <div class="background red" class:show={view === View.Header}></div>
+  <div class="background grey" class:show={view === View.Player}></div>
 
   <header class="centred slide" use:inview={inviewHalf} on:enter={viewHeader}>
     <h1>The Making Known</h1>
@@ -26,7 +37,7 @@ function viewMenu(): void {
       <p>This is what I think of that</p>
     </div>
 
-    <div class="centred slide" use:inview={inviewHalf} on:enter={viewMenu}>
+    <div class="centred slide" use:inview={inviewHalf} on:enter={viewPlayer}>
       <p>And another</p>
     </div>
   </div>
@@ -82,6 +93,10 @@ function viewMenu(): void {
 
 .background.red {
   background: #a6241d;
+}
+
+.background.grey {
+  background: linear-gradient(to right, #40444a, #6e7172 30%);
 }
 
 .background.show {
