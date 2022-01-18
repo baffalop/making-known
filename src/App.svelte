@@ -15,6 +15,8 @@ function viewMenu(): void {
 </script>
 
 <main class="carousel snap vertical view-{view}">
+  <div class="background red" class:show={view === 'header'}></div>
+
   <header class="centred slide" use:inview={inviewHalf} on:enter={viewHeader}>
     <h1>The Making Known</h1>
   </header>
@@ -31,13 +33,6 @@ function viewMenu(): void {
 </main>
 
 <style>
-.centred {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .carousel {
   height: 100vh;
   width: 100vw;
@@ -55,6 +50,13 @@ function viewMenu(): void {
   flex-direction: row;
 }
 
+.centred {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .slide {
   flex: none;
   height: 100%;
@@ -66,18 +68,24 @@ function viewMenu(): void {
   scroll-snap-align: center;
 }
 
-main:after {
-  background: #a6241d;
-  opacity: 0;
-
+.background {
   position: absolute;
-  content: '';
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  transition: opacity 300ms ease-out;
   z-index: -1;
+
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
+
+.background.red {
+  background: #a6241d;
+}
+
+.background.show {
+  opacity: 1;
 }
 
 main.view-header:after {
