@@ -1,7 +1,9 @@
 <script lang="ts">
 import { inview } from 'svelte-inview'
 import { fade } from 'svelte/transition'
-import { cubicOut } from 'svelte/easing'
+import { cubicOut, quartInOut } from 'svelte/easing'
+import { animateScroll } from 'svelte-scrollto-element'
+import { tick } from "svelte";
 
 const inviewHalf = { threshold: 0.5 }
 const fadeParams = { duration: 500, easing: cubicOut }
@@ -20,6 +22,8 @@ enum Piece {
 
 let view: View = View.Header
 let piece: Piece = Piece.One
+let scrollingPlayer: boolean = false
+
 let playerCarousel: HTMLElement
 let player: HTMLElement
 
@@ -27,12 +31,19 @@ const viewHeader = () => view = View.Header
 const viewMenu = () => view = View.Menu
 const viewPlayer = () => view = View.Player
 
-function play(p: Piece) {
-  playerCarousel.scrollTo({
-    left: player.offsetLeft,
-    behavior: 'smooth',
-  })
+async function play(p: Piece) {
   piece = p
+  scrollingPlayer = true
+  await tick()
+  animateScroll.scrollTo({
+    container: playerCarousel,
+    element: player,
+    duration: 800,
+    easing: quartInOut,
+    scrollX: true,
+    scrollY: false,
+    onDone: () => scrollingPlayer = false,
+  })
 }
 </script>
 
@@ -47,7 +58,7 @@ function play(p: Piece) {
     <h1>The Making Known</h1>
   </header>
 
-  <div class="slide carousel snap horizontal" bind:this={playerCarousel}>
+  <div id="player-carousel" class="slide carousel horizontal" class:snap={!scrollingPlayer} bind:this={playerCarousel}>
     <div class="centred slide" use:inview={inviewHalf} on:enter={viewMenu}>
       <ul>
         <li><a href="#" on:click={() => play(Piece.One)}>The first piece</a></li>
