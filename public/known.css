@@ -24,3 +24,14 @@ body {
   src: url(font/OriginalGaramondBT-Italic.otf);
   font-style: italic;
 }
+
+a {
+  color: #a6241d;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  line-height: 2em;
+}

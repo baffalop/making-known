@@ -12,11 +12,28 @@ enum View {
   Player = 'player',
 }
 
+enum Piece {
+  One,
+  Two,
+  Three,
+}
+
 let view: View = View.Header
+let piece: Piece = Piece.One
+let playerCarousel: HTMLElement
+let player: HTMLElement
 
 const viewHeader = () => view = View.Header
 const viewMenu = () => view = View.Menu
 const viewPlayer = () => view = View.Player
+
+function play(p: Piece) {
+  playerCarousel.scrollTo({
+    left: player.offsetLeft,
+    behavior: 'smooth',
+  })
+  piece = p
+}
 </script>
 
 <main class="carousel snap vertical view-{view}">
@@ -30,13 +47,26 @@ const viewPlayer = () => view = View.Player
     <h1>The Making Known</h1>
   </header>
 
-  <div class="slide carousel snap horizontal">
+  <div class="slide carousel snap horizontal" bind:this={playerCarousel}>
     <div class="centred slide" use:inview={inviewHalf} on:enter={viewMenu}>
-      <p>This is what I think of that</p>
+      <ul>
+        <li><a href="#" on:click={() => play(Piece.One)}>The first piece</a></li>
+        <li><a href="#" on:click={() => play(Piece.Two)}>The second piece</a></li>
+        <li><a href="#" on:click={() => play(Piece.Three)}>The third piece</a></li>
+      </ul>
     </div>
 
-    <div class="centred slide" use:inview={inviewHalf} on:enter={viewPlayer}>
-      <p>And another</p>
+    <div class="centred slide" use:inview={inviewHalf} on:enter={viewPlayer} bind:this={player}>
+      <p>The
+        {#if piece === Piece.One}
+          First
+        {:else if piece === Piece.Two}
+          Second
+        {:else if piece === Piece.Three}
+          Third
+        {/if}
+        Piece
+      </p>
     </div>
   </div>
 </main>
