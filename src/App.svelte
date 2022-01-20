@@ -64,7 +64,7 @@ async function play(p: Piece) {
 </script>
 
 <main class="carousel snap vertical view-{view}">
-  {#if view === View.Header}
+  {#if view === View.Menu}
     <div class="background red" transition:fadeJs></div>
   {:else if view === View.Player}
     <div class="background grey" transition:fadeJs></div>
