@@ -25,6 +25,16 @@ let scrollingPlayer: boolean = false
 let playerCarousel: HTMLElement
 let player: HTMLElement
 
+$: title = titleFromPiece(piece)
+
+function titleFromPiece (p: Piece): string {
+  switch (p) {
+    case Piece.One: return 'First'
+    case Piece.Two: return 'Second'
+    case Piece.Three: return 'Third'
+  }
+}
+
 const viewHeader = () => view = View.Header
 const viewMenu = () => view = View.Menu
 const viewPlayer = () => view = View.Player
@@ -74,16 +84,7 @@ async function play(p: Piece) {
     </div>
 
     <div class="centred slide" use:inview={inviewHalf} on:enter={viewPlayer} bind:this={player}>
-      <p>The
-        {#if piece === Piece.One}
-          First
-        {:else if piece === Piece.Two}
-          Second
-        {:else if piece === Piece.Three}
-          Third
-        {/if}
-        Piece
-      </p>
+      <h2>The {title} Piece</h2>
     </div>
   </div>
 </main>
