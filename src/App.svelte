@@ -1,6 +1,6 @@
 <script lang="ts">
 import { inview } from 'svelte-inview'
-import { cubicOut, quartInOut } from 'svelte/easing'
+import { cubicOut, cubicInOut } from 'svelte/easing'
 import { animateScroll } from 'svelte-scrollto-element'
 import { tick } from "svelte";
 
@@ -45,7 +45,7 @@ async function play(p: Piece) {
     container: playerCarousel,
     element: player,
     duration: 800,
-    easing: quartInOut,
+    easing: cubicInOut,
     scrollX: true,
     scrollY: false,
     onDone: () => scrollingPlayer = false,
