@@ -1,12 +1,10 @@
 <script lang="ts">
 import { inview } from 'svelte-inview'
-import { fade } from 'svelte/transition'
 import { cubicOut, quartInOut } from 'svelte/easing'
 import { animateScroll } from 'svelte-scrollto-element'
 import { tick } from "svelte";
 
 const inviewHalf = { threshold: 0.5 }
-const fadeParams = { duration: 500, easing: cubicOut }
 
 enum View {
   Header = 'header',
@@ -31,6 +29,14 @@ const viewHeader = () => view = View.Header
 const viewMenu = () => view = View.Menu
 const viewPlayer = () => view = View.Player
 
+function fadeJs (node: HTMLElement, { duration = 500, easing = cubicOut }) {
+  return {
+    duration,
+    easing,
+    tick: (t: number) => node.style.opacity = t.toString()
+  }
+}
+
 async function play(p: Piece) {
   piece = p
   scrollingPlayer = true
@@ -49,9 +55,9 @@ async function play(p: Piece) {
 
 <main class="carousel snap vertical view-{view}">
   {#if view === View.Header}
-    <div class="background red" transition:fade={fadeParams}></div>
+    <div class="background red" transition:fadeJs></div>
   {:else if view === View.Player}
-    <div class="background grey" transition:fade={fadeParams}></div>
+    <div class="background grey" transition:fadeJs></div>
   {/if}
 
   <header class="centred slide" use:inview={inviewHalf} on:enter={viewHeader}>
