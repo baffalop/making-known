@@ -57,7 +57,11 @@ async function play(p: Piece) {
   {#if view === View.Menu}
     <div class="background red" transition:fadeJs></div>
   {:else if view === View.Player}
-    <div class="background grey" transition:fadeJs></div>
+    {#if currentPiece === Piece.Herve}
+      <div class="background sample1" transition:fadeJs></div>
+    {:else if currentPiece === Piece.Julia}
+      <div class="background sample2" transition:fadeJs></div>
+    {/if}
   {/if}
 
   <header class="centred slide" use:inview={inviewHalf} on:enter={viewHeader}>
@@ -132,6 +136,16 @@ async function play(p: Piece) {
 
 .background.grey {
   background: linear-gradient(to right, #40444a, #6e7172 30%);
+}
+
+.background.sample1 {
+  background: url('img/sample1.jpeg') no-repeat;
+  background-size: cover;
+}
+
+.background.sample2 {
+  background: url('img/sample2.jpeg') no-repeat;
+  background-size: cover;
 }
 
 header {
