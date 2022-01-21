@@ -13,13 +13,13 @@ enum View {
 }
 
 enum Piece {
-  One = 'First',
-  Two = 'Second',
-  Three = 'Third',
+  Herve = 'Dear Hervé',
+  Julia = 'Dear Julia',
+  Conny = 'Dear Conny',
 }
 
 let view: View = View.Header
-let currentPiece: Piece = Piece.One
+let currentPiece: Piece = Piece.Herve
 let scrollingPlayer: boolean = false
 
 let playerCarousel: HTMLElement
@@ -67,16 +67,16 @@ async function play(p: Piece) {
   <div id="player-carousel" class="slide carousel horizontal" class:snap={!scrollingPlayer} bind:this={playerCarousel}>
     <div class="centred slide" use:inview={inviewHalf} on:enter={viewMenu}>
       <ul>
-        {#each [Piece.One, Piece.Two, Piece.Three] as piece, i}
+        {#each [Piece.Herve, Piece.Julia, Piece.Conny] as piece, i}
           <li style="--i: {i}">
-            <a href="#" on:click={() => play(piece)}>The {piece} Piece</a>
+            <a href="#" on:click={() => play(piece)}>No. {i + 1} {piece}</a>
           </li>
         {/each}
       </ul>
     </div>
 
     <div class="centred slide" use:inview={inviewHalf} on:enter={viewPlayer} bind:this={player}>
-      <h2>The {currentPiece} Piece</h2>
+      <h2>{currentPiece}</h2>
     </div>
   </div>
 </main>
