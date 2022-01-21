@@ -37,8 +37,8 @@ function fadeJs (node: HTMLElement, { duration = 500, easing = cubicOut }) {
   }
 }
 
-async function play(p: Piece) {
-  currentPiece = p
+async function play(piece: Piece) {
+  currentPiece = piece
   scrollingPlayer = true
   await tick()
   animateScroll.scrollTo({
