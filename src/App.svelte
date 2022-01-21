@@ -19,16 +19,16 @@ enum Piece {
 }
 
 let view: View = View.Header
-let piece: Piece = Piece.One
+let currentPiece: Piece = Piece.One
 let scrollingPlayer: boolean = false
 
 let playerCarousel: HTMLElement
 let player: HTMLElement
 
-$: title = titleFromPiece(piece)
+$: title = titleFromPiece(currentPiece)
 
-function titleFromPiece (p: Piece): string {
-  switch (p) {
+function titleFromPiece (piece: Piece): string {
+  switch (piece) {
     case Piece.One: return 'First'
     case Piece.Two: return 'Second'
     case Piece.Three: return 'Third'
@@ -48,7 +48,7 @@ function fadeJs (node: HTMLElement, { duration = 500, easing = cubicOut }) {
 }
 
 async function play(p: Piece) {
-  piece = p
+  currentPiece = p
   scrollingPlayer = true
   await tick()
   animateScroll.scrollTo({
@@ -77,9 +77,11 @@ async function play(p: Piece) {
   <div id="player-carousel" class="slide carousel horizontal" class:snap={!scrollingPlayer} bind:this={playerCarousel}>
     <div class="centred slide" use:inview={inviewHalf} on:enter={viewMenu}>
       <ul>
-        <li><a href="#" on:click={() => play(Piece.One)}>The first piece</a></li>
-        <li><a href="#" on:click={() => play(Piece.Two)}>The second piece</a></li>
-        <li><a href="#" on:click={() => play(Piece.Three)}>The third piece</a></li>
+        {#each [Piece.One, Piece.Two, Piece.Three] as piece, i}
+          <li style="--i: {i}">
+            <a href="#" on:click={() => play(piece)}>The {titleFromPiece(piece)} Piece</a>
+          </li>
+        {/each}
       </ul>
     </div>
 

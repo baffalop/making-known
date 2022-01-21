@@ -35,3 +35,7 @@ ul {
   list-style: none;
   line-height: 2em;
 }
+
+li {
+  transform: translateX(calc((var(--i) - 1) * 0.6em));
+}
