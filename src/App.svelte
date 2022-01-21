@@ -13,9 +13,9 @@ enum View {
 }
 
 enum Piece {
-  One,
-  Two,
-  Three,
+  One = 'First',
+  Two = 'Second',
+  Three = 'Third',
 }
 
 let view: View = View.Header
@@ -24,16 +24,6 @@ let scrollingPlayer: boolean = false
 
 let playerCarousel: HTMLElement
 let player: HTMLElement
-
-$: title = titleFromPiece(currentPiece)
-
-function titleFromPiece (piece: Piece): string {
-  switch (piece) {
-    case Piece.One: return 'First'
-    case Piece.Two: return 'Second'
-    case Piece.Three: return 'Third'
-  }
-}
 
 const viewHeader = () => view = View.Header
 const viewMenu = () => view = View.Menu
@@ -79,14 +69,14 @@ async function play(p: Piece) {
       <ul>
         {#each [Piece.One, Piece.Two, Piece.Three] as piece, i}
           <li style="--i: {i}">
-            <a href="#" on:click={() => play(piece)}>The {titleFromPiece(piece)} Piece</a>
+            <a href="#" on:click={() => play(piece)}>The {piece} Piece</a>
           </li>
         {/each}
       </ul>
     </div>
 
     <div class="centred slide" use:inview={inviewHalf} on:enter={viewPlayer} bind:this={player}>
-      <h2>The {title} Piece</h2>
+      <h2>The {currentPiece} Piece</h2>
     </div>
   </div>
 </main>
