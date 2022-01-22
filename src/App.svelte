@@ -1,23 +1,13 @@
 <script lang="ts">
 import { inview } from 'svelte-inview'
-import { cubicOut, quartInOut } from 'svelte/easing'
-import { fade } from 'svelte/transition'
+import { quartInOut } from 'svelte/easing'
 import { animateScroll } from 'svelte-scrollto-element'
 import { tick } from 'svelte'
 
+import { View, Piece } from './types'
+import Background from './Background.svelte'
+
 const inviewHalf = { threshold: 0.5 }
-
-enum View {
-  Header = 'header',
-  Menu = 'menu',
-  Player = 'player',
-}
-
-enum Piece {
-  Herve = 'Dear Hervé',
-  Julia = 'Dear Julia',
-  Conny = 'Dear Conny',
-}
 
 let view: View = View.Header
 let currentPiece: Piece = Piece.Herve
@@ -29,24 +19,6 @@ let player: HTMLElement
 const viewHeader = () => view = View.Header
 const viewMenu = () => view = View.Menu
 const viewPlayer = () => view = View.Player
-
-function customFade (node: HTMLElement, { useCss = false, duration = 500, easing = cubicOut }: FadeParams) {
-  if (useCss) {
-    return fade(node, { duration, easing })
-  }
-
-  return {
-    duration,
-    easing,
-    tick: (t: number) => node.style.opacity = t.toString()
-  }
-}
-
-interface FadeParams {
-  useCss: boolean
-  duration: number
-  easing: (n: number) => number
-}
 
 async function play(piece: Piece) {
   currentPiece = piece
@@ -65,27 +37,7 @@ async function play(piece: Piece) {
 </script>
 
 <main class="carousel snap vertical view-{view}">
-  {#if view === View.Header}
-    <div
-      class="background red"
-      in:customFade="{{ useCss: scrollingPlayer }}"
-      out:customFade="{{ useCss: scrollingPlayer }}"
-    ></div>
-  {:else if view === View.Player}
-    {#if currentPiece === Piece.Herve}
-      <div
-        class="background sample1"
-        in:customFade="{{ useCss: scrollingPlayer }}"
-        out:customFade="{{ useCss: scrollingPlayer }}"
-      ></div>
-    {:else if currentPiece === Piece.Julia}
-      <div
-        class="background sample2"
-        in:customFade="{{ useCss: scrollingPlayer }}"
-        out:customFade="{{ useCss: scrollingPlayer }}"
-      ></div>
-    {/if}
-  {/if}
+  <Background view={view} piece={currentPiece} autoscrolling={scrollingPlayer} />
 
   <header class="centred slide" use:inview={inviewHalf} on:enter={viewHeader}>
     <h1>The Making Known</h1>
@@ -142,33 +94,6 @@ async function play(piece: Piece) {
 .carousel.snap > .slide {
   scroll-snap-stop: always;
   scroll-snap-align: center;
-}
-
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-.background.red {
-  background: #a6241d;
-}
-
-.background.grey {
-  background: linear-gradient(to right, #40444a, #6e7172 30%);
-}
-
-.background.sample1 {
-  background: url('img/sample1.jpeg') no-repeat;
-  background-size: cover;
-}
-
-.background.sample2 {
-  background: url('img/sample2.jpeg') no-repeat;
-  background-size: cover;
 }
 
 header {
