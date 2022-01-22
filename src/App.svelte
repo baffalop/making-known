@@ -1,8 +1,9 @@
 <script lang="ts">
 import { inview } from 'svelte-inview'
 import { cubicOut, quartInOut } from 'svelte/easing'
+import { fade } from 'svelte/transition'
 import { animateScroll } from 'svelte-scrollto-element'
-import { tick } from "svelte";
+import { tick } from 'svelte'
 
 const inviewHalf = { threshold: 0.5 }
 
@@ -29,12 +30,22 @@ const viewHeader = () => view = View.Header
 const viewMenu = () => view = View.Menu
 const viewPlayer = () => view = View.Player
 
-function fadeJs (node: HTMLElement, { duration = 500, easing = cubicOut }) {
+function customFade (node: HTMLElement, { useCss = false, duration = 500, easing = cubicOut }: FadeParams) {
+  if (useCss) {
+    return fade(node, { duration, easing })
+  }
+
   return {
     duration,
     easing,
     tick: (t: number) => node.style.opacity = t.toString()
   }
+}
+
+interface FadeParams {
+  useCss: boolean
+  duration: number
+  easing: (n: number) => number
 }
 
 async function play(piece: Piece) {
@@ -55,12 +66,24 @@ async function play(piece: Piece) {
 
 <main class="carousel snap vertical view-{view}">
   {#if view === View.Header}
-    <div class="background red" transition:fadeJs></div>
+    <div
+      class="background red"
+      in:customFade="{{ useCss: scrollingPlayer }}"
+      out:customFade="{{ useCss: scrollingPlayer }}"
+    ></div>
   {:else if view === View.Player}
     {#if currentPiece === Piece.Herve}
-      <div class="background sample1" transition:fadeJs></div>
+      <div
+        class="background sample1"
+        in:customFade="{{ useCss: scrollingPlayer }}"
+        out:customFade="{{ useCss: scrollingPlayer }}"
+      ></div>
     {:else if currentPiece === Piece.Julia}
-      <div class="background sample2" transition:fadeJs></div>
+      <div
+        class="background sample2"
+        in:customFade="{{ useCss: scrollingPlayer }}"
+        out:customFade="{{ useCss: scrollingPlayer }}"
+      ></div>
     {/if}
   {/if}
 
