@@ -25,6 +25,11 @@ body {
   font-style: italic;
 }
 
+p {
+  width: 80%;
+  max-width: 800px;
+}
+
 a {
   color: #efcd89;
   font-weight: bold;

@@ -46,9 +46,13 @@ async function scrollToPlayer () {
   <Background view={view} piece={currentPiece} autoscrolling={scrollingPlayer} />
 
   <header class="centred slide" use:inview={inviewConfig} on:enter={viewHeader}>
-    <h1>
-      The <br /> Making <br /> Known
-    </h1>
+    <h1>The Making Known</h1>
+    <p>
+      You will be led through observations, reflections, and movements selected
+      randomly from an evolving collection of objects. The experience will last
+      approximately sixty minutes. Please put on your headphones, turn off the
+      ringer of your device, and when you are ready, scroll down to begin.
+    </p>
   </header>
 
   <div id="player-carousel" class="slide carousel horizontal" class:snap={!scrollingPlayer} bind:this={playerCarousel}>
@@ -98,9 +102,8 @@ async function scrollToPlayer () {
   scroll-snap-align: center;
 }
 
-header {
+h1 {
   text-align: center;
-  line-height: 3em;
   font-style: italic;
 }
 </style>
