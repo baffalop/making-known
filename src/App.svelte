@@ -46,7 +46,9 @@ async function scrollToPlayer () {
   <Background view={view} piece={currentPiece} autoscrolling={scrollingPlayer} />
 
   <header class="centred slide" use:inview={inviewConfig} on:enter={viewHeader}>
-    <h1>The Making Known</h1>
+    <h1>
+      The <br /> Making <br /> Known
+    </h1>
   </header>
 
   <div id="player-carousel" class="slide carousel horizontal" class:snap={!scrollingPlayer} bind:this={playerCarousel}>
@@ -97,7 +99,8 @@ async function scrollToPlayer () {
 }
 
 header {
+  text-align: center;
+  line-height: 3em;
   font-style: italic;
-  font-size: calc(10px + 2vmin);
 }
 </style>
