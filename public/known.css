@@ -6,7 +6,7 @@ body {
   background: linear-gradient(to bottom, #302d2c, #6e7172 50%);
 
   font-family: 'GaramondBT', serif, system-ui, -apple-system, -apple-system-font;
-  font-size: calc(14pt + 2vmin);
+  font-size: calc(12pt + 2vmin);
 
   margin: 0;
   height: 100%;
