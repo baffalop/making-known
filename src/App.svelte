@@ -6,6 +6,7 @@ import { tick } from 'svelte'
 
 import { View, Piece } from './types'
 import Background from './Background.svelte'
+import Menu from './Menu.svelte'
 
 const inviewHalf = { threshold: 0.5 }
 
@@ -20,8 +21,12 @@ const viewHeader = () => view = View.Header
 const viewMenu = () => view = View.Menu
 const viewPlayer = () => view = View.Player
 
-async function play(piece: Piece) {
+function handleSelect ({ detail: { piece }}) {
   currentPiece = piece
+  scrollToPlayer()
+}
+
+async function scrollToPlayer () {
   scrollingPlayer = true
   await tick()
   animateScroll.scrollTo({
@@ -45,13 +50,7 @@ async function play(piece: Piece) {
 
   <div id="player-carousel" class="slide carousel horizontal" class:snap={!scrollingPlayer} bind:this={playerCarousel}>
     <div class="centred slide" use:inview={inviewHalf} on:enter={viewMenu}>
-      <ul>
-        {#each [Piece.Herve, Piece.Julia, Piece.Conny] as piece, i}
-          <li style="--i: {i}">
-            <a href="#" on:click={() => play(piece)}>No. {i + 1} {piece}</a>
-          </li>
-        {/each}
-      </ul>
+      <Menu on:select={handleSelect} />
     </div>
 
     <div class="centred slide" use:inview={inviewHalf} on:enter={viewPlayer} bind:this={player}>
