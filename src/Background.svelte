@@ -55,6 +55,11 @@ function customFade (node: HTMLElement, { useCss = false, duration = 500, easing
   {/if}
 {/if}
 
+<!-- for preloading -->
+<div class="background invisible sample1"></div>
+<div class="background invisible sample2"></div>
+<div class="background invisible sample3"></div>
+
 <style>
 .background {
   position: absolute;
@@ -63,6 +68,10 @@ function customFade (node: HTMLElement, { useCss = false, duration = 500, easing
   width: 100%;
   height: 100%;
   z-index: -1;
+}
+
+.invisible {
+  visibility: hidden;
 }
 
 .background.red {
