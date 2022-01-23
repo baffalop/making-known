@@ -46,6 +46,12 @@ function customFade (node: HTMLElement, { useCss = false, duration = 500, easing
       in:customFade="{{ useCss: autoscrolling }}"
       out:customFade="{{ useCss: autoscrolling }}"
     ></div>
+  {:else if piece === Piece.Conny}
+    <div
+      class="background sample3"
+      in:customFade="{{ useCss: autoscrolling }}"
+      out:customFade="{{ useCss: autoscrolling }}"
+    ></div>
   {/if}
 {/if}
 
@@ -68,12 +74,17 @@ function customFade (node: HTMLElement, { useCss = false, duration = 500, easing
 }
 
 .background.sample1 {
-  background: url('img/sample1.jpeg') no-repeat;
+  background-image: url('img/sample1.jpeg');
   background-size: cover;
 }
 
 .background.sample2 {
-  background: url('img/sample2.jpeg') no-repeat;
+  background-image: url('img/sample2.jpeg');
+  background-size: cover;
+}
+
+.background.sample3 {
+  background-image: url('img/sample3.jpeg');
   background-size: cover;
 }
 </style>
