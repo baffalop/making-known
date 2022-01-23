@@ -8,7 +8,7 @@ import { View, Piece } from './types'
 import Background from './Background.svelte'
 import Menu from './Menu.svelte'
 
-const inviewHalf = { threshold: 0.5 }
+const inviewConfig = { threshold: 0.7 }
 
 let view: View = View.Header
 let currentPiece: Piece = Piece.Herve
@@ -44,16 +44,16 @@ async function scrollToPlayer () {
 <main class="carousel snap vertical view-{view}">
   <Background view={view} piece={currentPiece} autoscrolling={scrollingPlayer} />
 
-  <header class="centred slide" use:inview={inviewHalf} on:enter={viewHeader}>
+  <header class="centred slide" use:inview={inviewConfig} on:enter={viewHeader}>
     <h1>The Making Known</h1>
   </header>
 
   <div id="player-carousel" class="slide carousel horizontal" class:snap={!scrollingPlayer} bind:this={playerCarousel}>
-    <div class="centred slide" use:inview={inviewHalf} on:enter={viewMenu}>
+    <div class="centred slide" use:inview={inviewConfig} on:enter={viewMenu}>
       <Menu on:select={handleSelect} />
     </div>
 
-    <div class="centred slide" use:inview={inviewHalf} on:enter={viewPlayer} bind:this={player}>
+    <div class="centred slide" use:inview={inviewConfig} on:enter={viewPlayer} bind:this={player}>
       <h2>{currentPiece}</h2>
     </div>
   </div>
