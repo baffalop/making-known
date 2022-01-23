@@ -7,6 +7,7 @@ import { tick } from 'svelte'
 import { View, Piece } from './types'
 import Background from './Background.svelte'
 import Menu from './Menu.svelte'
+import Player from './Player.svelte'
 
 const inviewConfig = { threshold: 0.7 }
 
@@ -54,7 +55,7 @@ async function scrollToPlayer () {
     </div>
 
     <div class="centred slide" use:inview={inviewConfig} on:enter={viewPlayer} bind:this={player}>
-      <h2>{currentPiece}</h2>
+      <Player piece={currentPiece} />
     </div>
   </div>
 </main>
