@@ -42,7 +42,7 @@ async function scrollToPlayer () {
 }
 </script>
 
-<main class="carousel snap vertical view-{view}">
+<main class="carousel snap vertical">
   <Background view={view} piece={currentPiece} autoscrolling={scrollingPlayer} />
 
   <header class="centred slide" use:inview={inviewConfig} on:enter={viewHeader}>
