@@ -27,7 +27,7 @@ function customFade (node: HTMLElement, { useCss = false, duration = 500, easing
 }
 </script>
 
-{#if view === View.Header}
+{#if view === View.Menu}
   <div
     class="background red"
     in:customFade="{{ useCss: autoscrolling }}"
