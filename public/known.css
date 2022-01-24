@@ -3,7 +3,8 @@ body {
   -webkit-user-select: text;
 
   color: #efcd89;
-  background: linear-gradient(to bottom, #302d2c, #6e7172 50%);
+  background: url('img/bg-main.jpeg') no-repeat;
+  background-size: cover;
 
   font-family: 'GaramondBT', serif, system-ui, -apple-system, -apple-system-font;
   font-size: calc(12pt + 2vmin);

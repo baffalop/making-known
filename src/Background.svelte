@@ -36,19 +36,19 @@ function customFade (node: HTMLElement, { useCss = false, duration = 500, easing
 {:else if view === View.Player}
   {#if piece === Piece.Herve}
     <div
-      class="background sample1"
+      class="background bg1"
       in:customFade="{{ useCss: autoscrolling }}"
       out:customFade="{{ useCss: autoscrolling }}"
     ></div>
   {:else if piece === Piece.Julia}
     <div
-      class="background sample2"
+      class="background bg2"
       in:customFade="{{ useCss: autoscrolling }}"
       out:customFade="{{ useCss: autoscrolling }}"
     ></div>
   {:else if piece === Piece.Conny}
     <div
-      class="background sample3"
+      class="background bg3"
       in:customFade="{{ useCss: autoscrolling }}"
       out:customFade="{{ useCss: autoscrolling }}"
     ></div>
@@ -56,9 +56,9 @@ function customFade (node: HTMLElement, { useCss = false, duration = 500, easing
 {/if}
 
 <!-- for preloading -->
-<div class="background invisible sample1"></div>
-<div class="background invisible sample2"></div>
-<div class="background invisible sample3"></div>
+<div class="background invisible bg1"></div>
+<div class="background invisible bg2"></div>
+<div class="background invisible bg3"></div>
 
 <style>
 .background {
@@ -82,18 +82,18 @@ function customFade (node: HTMLElement, { useCss = false, duration = 500, easing
   background: linear-gradient(to right, #40444a, #6e7172 30%);
 }
 
-.background.sample1 {
-  background-image: url('img/sample1.jpeg');
+.background.bg1 {
+  background-image: url('img/bg1.jpeg');
   background-size: cover;
 }
 
-.background.sample2 {
-  background-image: url('img/sample2.jpeg');
+.background.bg2 {
+  background-image: url('img/bg2.jpeg');
   background-size: cover;
 }
 
-.background.sample3 {
-  background-image: url('img/sample3.jpeg');
+.background.bg3 {
+  background-image: url('img/bg3.jpeg');
   background-size: cover;
 }
 </style>
