@@ -1,6 +1,6 @@
 <script lang="ts">
 import { createEventDispatcher } from 'svelte'
-import { Piece } from './types'
+import { Piece, titleFor } from './types'
 
 const dispatch = createEventDispatcher()
 
@@ -12,7 +12,7 @@ function select (piece: Piece) {
 <ul>
   {#each [Piece.Herve, Piece.Julia, Piece.Conny] as piece, i}
     <li style="--i: {i}">
-      <a href="#" on:click={() => select(piece)}>No. {i + 1} {piece}</a>
+      <a href="#" on:click={() => select(piece)}>No. {i + 1} {titleFor(piece)}</a>
     </li>
   {/each}
 </ul>

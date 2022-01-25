@@ -1,10 +1,10 @@
 <script lang="ts">
-import { Piece } from './types'
+import { Piece, titleFor } from './types'
 
 export let piece: Piece
 </script>
 
-<h1>{piece}</h1>
+<h1>{titleFor(piece)}</h1>
 <br />
 <br />
 <br />
