@@ -2,15 +2,74 @@
 import { Piece, titleFor } from './types'
 
 export let piece: Piece
+
+const skipInterval = 10
+
+let currentTime = 0
+let paused = true
+
+function togglePlay (): void {
+  paused = !paused
+}
+
+function ffw (): void {
+  currentTime += skipInterval
+}
+
+function rew (): void {
+  currentTime -= skipInterval
+}
 </script>
 
 <h1>{titleFor(piece)}</h1>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+
+<div class="player">
+  <button class="rew" on:click={rew}></button>
+  <button class="play-pause" class:paused on:click={togglePlay}></button>
+  <button class="ffw" on:click={ffw}></button>
+
+  <audio src="audio/{piece}.mp3" bind:currentTime bind:paused></audio>
+</div>
 
 <style>
+.player {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  background: transparent no-repeat;
+  font-size: 100%;
+  border: 0;
+  outline: 0;
+  padding: 0;
+
+  cursor: pointer;
+  height: 3em;
+  width: 4em;
+}
+
+button.play-pause {
+  width: 5em;
+  height: 2em;
+  background-image: url(img/play-pause.png);
+  background-size: 100% auto;
+  background-position: 50% 100%;
+}
+
+button.play-pause.paused {
+  background-position: 50% 0;
+}
+
+button.ffw {
+  background-image: url(img/ffw.png);
+  background-size: contain;
+}
+
+button.rew {
+  background-image: url(img/rew.png);
+  background-size: contain;
+}
 </style>
