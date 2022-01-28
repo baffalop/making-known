@@ -1,8 +1,10 @@
 <script lang="ts">
-export let resolution = 20
 export let progress = 0
 export let playing = false
 
+let width = 600
+
+$: resolution = 8 + Math.floor(width / 25)
 $: blips = genBlips(resolution, progress)
 
 interface Blip {
@@ -24,7 +26,7 @@ function range (n: number): number[] {
 }
 </script>
 
-<div class="timeline">
+<div class="timeline" bind:clientWidth={width}>
   {#each blips as { lit, big }, i (i)}
     <div class="blip" class:lit class:big></div>
   {/each}

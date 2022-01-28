@@ -34,7 +34,7 @@ function rew (): void {
   <button class="play-pause" class:playing on:click={togglePlay}></button>
   <button class="ffw" on:click={ffw}></button>
 </div>
-<Timeline resolution={25} {progress} {playing} />
+<Timeline {progress} {playing} />
 
 <style>
 .controls {
