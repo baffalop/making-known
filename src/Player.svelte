@@ -45,15 +45,23 @@ function rew (): void {
 }
 
 button {
-  background: transparent no-repeat;
   font-size: 100%;
   border: 0;
   outline: 0;
   padding: 0;
 
+  background: transparent no-repeat scroll;
+  background-size: contain;
+  transition: opacity 80ms ease-in 100ms;
+
   cursor: pointer;
   height: 2.5em;
   width: 3em;
+}
+
+button:active {
+  transition: none;
+  opacity: 0.5;
 }
 
 button.play-pause {
