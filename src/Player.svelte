@@ -52,13 +52,13 @@ button {
   padding: 0;
 
   cursor: pointer;
-  height: 3em;
-  width: 4em;
+  height: 2.5em;
+  width: 3em;
 }
 
 button.play-pause {
   width: 5em;
-  height: 2em;
+  height: 2.5em;
   background-image: url(img/play-pause.png);
   background-size: 100% auto;
 }
