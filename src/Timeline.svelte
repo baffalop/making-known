@@ -49,8 +49,8 @@ function range (n: number): number[] {
   width: 5px;
   background-color: #ddd;
   transition-property: background-color, height, width;
-  transition-duration: 400ms;
-  transition-timing-function: ease-in-out;
+  transition-duration: 300ms;
+  transition-timing-function: ease-out;
 }
 
 .blip.lit {
