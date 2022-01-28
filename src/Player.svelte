@@ -8,6 +8,8 @@ const skipInterval = 10
 let currentTime = 0
 let paused = true
 
+$: playing = !paused
+
 function togglePlay (): void {
   paused = !paused
 }
@@ -25,7 +27,7 @@ function rew (): void {
 
 <div class="player">
   <button class="rew" on:click={rew}></button>
-  <button class="play-pause" class:paused on:click={togglePlay}></button>
+  <button class="play-pause" class:playing on:click={togglePlay}></button>
   <button class="ffw" on:click={ffw}></button>
 
   <audio src="audio/{piece}.mp3" bind:currentTime bind:paused></audio>
@@ -56,11 +58,10 @@ button.play-pause {
   height: 2em;
   background-image: url(img/play-pause.png);
   background-size: 100% auto;
-  background-position: 50% 100%;
 }
 
-button.play-pause.paused {
-  background-position: 50% 0;
+button.play-pause.playing {
+  background-position: 50% 100%;
 }
 
 button.ffw {
