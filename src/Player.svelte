@@ -1,5 +1,6 @@
 <script lang="ts">
 import { Piece, titleFor } from './types'
+import Timeline from './Timeline.svelte'
 
 export let piece: Piece
 
@@ -7,8 +8,10 @@ const skipInterval = 10
 
 let currentTime = 0
 let paused = true
+let duration = 0
 
 $: playing = !paused
+$: progress = duration == 0 ? 0 : currentTime / duration
 
 function togglePlay (): void {
   paused = !paused
@@ -23,18 +26,18 @@ function rew (): void {
 }
 </script>
 
-<h1>{titleFor(piece)}</h1>
+<audio src="audio/{piece}.mp3" bind:currentTime bind:paused bind:duration></audio>
 
-<div class="player">
+<h1>{titleFor(piece)}</h1>
+<div class="controls">
   <button class="rew" on:click={rew}></button>
   <button class="play-pause" class:playing on:click={togglePlay}></button>
   <button class="ffw" on:click={ffw}></button>
-
-  <audio src="audio/{piece}.mp3" bind:currentTime bind:paused></audio>
 </div>
+<Timeline resolution={25} {progress} {playing} />
 
 <style>
-.player {
+.controls {
   display: flex;
   flex-direction: row;
   align-items: center;
