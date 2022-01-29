@@ -34,7 +34,7 @@ function customFade (node: HTMLElement, { useCss = false, duration = 500, easing
     out:customFade="{{ useCss: autoscrolling }}"
   ></div>
 {:else if view === View.Player}
-  {#if piece === Piece.Herve}
+  {#if piece === Piece.Diana}
     <div
       class="background bg1"
       in:customFade="{{ useCss: autoscrolling }}"

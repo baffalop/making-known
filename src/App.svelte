@@ -12,7 +12,7 @@ import Player from './Player.svelte'
 const inviewConfig = { threshold: 0.7 }
 
 let view: View = View.Header
-let currentPiece: Piece = Piece.Herve
+let currentPiece: Piece = Piece.Diana
 let scrollingPlayer: boolean = false
 
 let playerCarousel: HTMLElement
