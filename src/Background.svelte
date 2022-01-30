@@ -1,64 +1,14 @@
 <script lang="ts">
-import { cubicOut } from 'svelte/easing'
-import { fade } from 'svelte/transition'
-
 import { View, Piece } from './types'
 
 export let view: View
 export let piece: Piece
-export let autoscrolling: boolean
-
-interface FadeParams {
-  useCss: boolean
-  duration: number
-  easing: (n: number) => number
-}
-
-function customFade (node: HTMLElement, { useCss = false, duration = 500, easing = cubicOut }: FadeParams) {
-  if (useCss) {
-    return fade(node, { duration, easing })
-  }
-
-  return {
-    duration,
-    easing,
-    tick: (t: number) => node.style.opacity = t.toString()
-  }
-}
 </script>
 
-{#if view === View.Menu}
-  <div
-    class="background red"
-    in:customFade="{{ useCss: autoscrolling }}"
-    out:customFade="{{ useCss: autoscrolling }}"
-  ></div>
-{:else if view === View.Player}
-  {#if piece === Piece.Diana}
-    <div
-      class="background bg1"
-      in:customFade="{{ useCss: autoscrolling }}"
-      out:customFade="{{ useCss: autoscrolling }}"
-    ></div>
-  {:else if piece === Piece.Julia}
-    <div
-      class="background bg2"
-      in:customFade="{{ useCss: autoscrolling }}"
-      out:customFade="{{ useCss: autoscrolling }}"
-    ></div>
-  {:else if piece === Piece.Conny}
-    <div
-      class="background bg3"
-      in:customFade="{{ useCss: autoscrolling }}"
-      out:customFade="{{ useCss: autoscrolling }}"
-    ></div>
-  {/if}
-{/if}
-
-<!-- for preloading -->
-<div class="background invisible bg1"></div>
-<div class="background invisible bg2"></div>
-<div class="background invisible bg3"></div>
+<div class="background red" class:visible={view === View.Menu}></div>
+<div class="background bg1" class:visible={view === View.Player && piece === Piece.Diana}></div>
+<div class="background bg2" class:visible={view === View.Player && piece === Piece.Julia}></div>
+<div class="background bg3" class:visible={view === View.Player && piece === Piece.Conny}></div>
 
 <style>
 .background {
@@ -68,10 +18,14 @@ function customFade (node: HTMLElement, { useCss = false, duration = 500, easing
   width: 100%;
   height: 100%;
   z-index: -1;
+
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+  will-change: opacity;
 }
 
-.invisible {
-  visibility: hidden;
+.visible {
+  opacity: 1;
 }
 
 .background.red {
