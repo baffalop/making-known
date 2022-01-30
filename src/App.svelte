@@ -116,6 +116,7 @@ h1 {
   width: 100%;
   height: 100%;
   z-index: -1;
+  background-size: cover;
 
   opacity: 0;
   transition: opacity 300ms ease-out;
@@ -135,17 +136,14 @@ h1 {
 }
 
 .background.bg1 {
-  background-image: url('img/bg1.jpeg');
-  background-size: cover;
+  background-image: url(img/bg1.jpeg);
 }
 
 .background.bg2 {
-  background-image: url('img/bg2.jpeg');
-  background-size: cover;
+  background-image: url(img/bg2.jpeg);
 }
 
 .background.bg3 {
-  background-image: url('img/bg3.jpeg');
-  background-size: cover;
+  background-image: url(img/bg3.jpeg);
 }
 </style>
