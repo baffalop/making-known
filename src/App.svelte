@@ -51,7 +51,7 @@ async function scrollToPlayer () {
 }
 </script>
 
-<header class="centred slide" class:snap={!scrollingPlayer} use:inview on:enter={viewHeader}>
+<header class="centred slide snap" use:inview on:enter={viewHeader}>
   <h1>The Making Known</h1>
   <p>
     You will be led through observations, reflections, and movements selected
@@ -61,7 +61,7 @@ async function scrollToPlayer () {
   </p>
 </header>
 
-<div id="player-carousel" class="slide carousel horizontal" class:snap={!scrollingPlayer} bind:this={playerCarousel}>
+<div class="slide snap carousel horizontal" bind:this={playerCarousel}>
   <div class="centred slide" class:snap={!scrollingPlayer} use:inview on:enter={viewMenu}>
     <Menu on:select={scrollToPlayer} />
   </div>
