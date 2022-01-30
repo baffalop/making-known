@@ -3,7 +3,7 @@ body {
   -webkit-user-select: text;
 
   color: #efcd89;
-  background: url('img/bg-main.jpeg') no-repeat;
+  background: url('img/bg-main.jpeg') no-repeat fixed;
   background-size: cover;
 
   font-size: calc(12pt + 2vmin);

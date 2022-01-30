@@ -51,32 +51,30 @@ async function scrollToPlayer () {
 }
 </script>
 
-<main class="carousel snap vertical">
-  <header class="centred slide" use:inview on:enter={viewHeader}>
-    <h1>The Making Known</h1>
-    <p>
-      You will be led through observations, reflections, and movements selected
-      randomly from an evolving collection of objects. The experience will last
-      approximately sixty minutes. Please put on your headphones, turn off the
-      ringer of your device, and when you are ready, scroll down to begin.
-    </p>
-  </header>
+<header class="centred slide" class:snap={!scrollingPlayer} use:inview on:enter={viewHeader}>
+  <h1>The Making Known</h1>
+  <p>
+    You will be led through observations, reflections, and movements selected
+    randomly from an evolving collection of objects. The experience will last
+    approximately sixty minutes. Please put on your headphones, turn off the
+    ringer of your device, and when you are ready, scroll down to begin.
+  </p>
+</header>
 
-  <div id="player-carousel" class="slide carousel horizontal" class:snap={!scrollingPlayer} bind:this={playerCarousel}>
-    <div class="centred slide" use:inview on:enter={viewMenu}>
-      <Menu on:select={scrollToPlayer} />
-    </div>
-
-    <div class="centred slide" use:inview on:enter={viewPlayer} bind:this={player}>
-      <Player piece={currentPiece} />
-    </div>
+<div id="player-carousel" class="slide carousel horizontal" class:snap={!scrollingPlayer} bind:this={playerCarousel}>
+  <div class="centred slide" class:snap={!scrollingPlayer} use:inview on:enter={viewMenu}>
+    <Menu on:select={scrollToPlayer} />
   </div>
 
-  <div class="background red" class:show={view === View.Menu}></div>
-  <div class="background bg1" class:show={view === View.Player && currentPiece === Piece.Dianna}></div>
-  <div class="background bg2" class:show={view === View.Player && currentPiece === Piece.Jane}></div>
-  <div class="background bg3" class:show={view === View.Player && currentPiece === Piece.Paul}></div>
-</main>
+  <div class="centred slide" class:snap={!scrollingPlayer} use:inview on:enter={viewPlayer} bind:this={player}>
+    <Player piece={currentPiece} />
+  </div>
+</div>
+
+<div class="background red" class:show={view === View.Menu}></div>
+<div class="background bg1" class:show={view === View.Player && currentPiece === Piece.Dianna}></div>
+<div class="background bg2" class:show={view === View.Player && currentPiece === Piece.Jane}></div>
+<div class="background bg3" class:show={view === View.Player && currentPiece === Piece.Paul}></div>
 
 <style>
 .carousel {
@@ -105,11 +103,11 @@ async function scrollToPlayer () {
 
 .slide {
   flex: none;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
 }
 
-.carousel.snap > .slide {
+.snap {
   scroll-snap-stop: always;
   scroll-snap-align: center;
 }
