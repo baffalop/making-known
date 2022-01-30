@@ -5,7 +5,6 @@ import { animateScroll } from 'svelte-scrollto-element'
 import { tick } from 'svelte'
 
 import { View, Piece } from './types'
-import Background from './Background.svelte'
 import Menu from './Menu.svelte'
 import Player from './Player.svelte'
 
@@ -43,8 +42,6 @@ async function scrollToPlayer () {
 </script>
 
 <main class="carousel snap vertical">
-  <Background view={view} piece={currentPiece} />
-
   <header class="centred slide" use:inview={inviewConfig} on:enter={viewHeader}>
     <h1>The Making Known</h1>
     <p>
@@ -64,6 +61,11 @@ async function scrollToPlayer () {
       <Player piece={currentPiece} />
     </div>
   </div>
+
+  <div class="background red" class:show={view === View.Menu}></div>
+  <div class="background bg1" class:show={view === View.Player && currentPiece === Piece.Diana}></div>
+  <div class="background bg2" class:show={view === View.Player && currentPiece === Piece.Julia}></div>
+  <div class="background bg3" class:show={view === View.Player && currentPiece === Piece.Conny}></div>
 </main>
 
 <style>
@@ -105,5 +107,45 @@ async function scrollToPlayer () {
 h1 {
   text-align: center;
   font-style: italic;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+  will-change: opacity;
+}
+
+.background.show {
+  opacity: 1;
+}
+
+.background.red {
+  background: #a6241d;
+}
+
+.background.grey {
+  background: linear-gradient(to right, #40444a, #6e7172 30%);
+}
+
+.background.bg1 {
+  background-image: url('img/bg1.jpeg');
+  background-size: cover;
+}
+
+.background.bg2 {
+  background-image: url('img/bg2.jpeg');
+  background-size: cover;
+}
+
+.background.bg3 {
+  background-image: url('img/bg3.jpeg');
+  background-size: cover;
 }
 </style>
