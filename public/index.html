@@ -7,6 +7,25 @@
     <meta name="description" content="An audio guide by Benny Nemer" />
     <meta name="theme-color" content="#302d2c" />
 
+    <!-- They say best practice for fast font loading is to inline these declarations -->
+    <style>
+      @font-face {
+        font-family: 'GaramondBT';
+        src: url(font/OriginalGaramondBT-Roman.otf);
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'GaramondBT';
+        src: url(font/OriginalGaramondBT-Italic.otf);
+        font-style: italic;
+      }
+
+      body {
+        font-family: 'GaramondBT', serif, system-ui, -apple-system, -apple-system-font;
+      }
+    </style>
+
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="known.css" />
 

@@ -6,24 +6,11 @@ body {
   background: url('img/bg-main.jpeg') no-repeat;
   background-size: cover;
 
-  font-family: 'GaramondBT', serif, system-ui, -apple-system, -apple-system-font;
   font-size: calc(12pt + 2vmin);
 
   margin: 0;
   height: 100%;
   width: 100%;
-}
-
-@font-face {
-  font-family: 'GaramondBT';
-  src: url(font/OriginalGaramondBT-Roman.otf);
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'GaramondBT';
-  src: url(font/OriginalGaramondBT-Italic.otf);
-  font-style: italic;
 }
 
 p {
