@@ -1,5 +1,5 @@
 <script lang="ts">
-import { inview } from 'svelte-inview'
+import { inview as baseInview } from 'svelte-inview'
 import { quartInOut } from 'svelte/easing'
 import { animateScroll } from 'svelte-scrollto-element'
 import { tick } from 'svelte'
@@ -8,14 +8,15 @@ import { View, Piece } from './types'
 import Menu from './Menu.svelte'
 import Player from './Player.svelte'
 
-const inviewConfig = { threshold: 0.7 }
-
 let view: View = View.Header
 let currentPiece: Piece = Piece.Diana
 let scrollingPlayer: boolean = false
 
 let playerCarousel: HTMLElement
 let player: HTMLElement
+
+// wrapper for inview action with my config defaults
+const inview = node => baseInview(node, { threshold: 0.8 })
 
 const viewHeader = () => view = View.Header
 const viewMenu = () => view = View.Menu
@@ -42,7 +43,7 @@ async function scrollToPlayer () {
 </script>
 
 <main class="carousel snap vertical">
-  <header class="centred slide" use:inview={inviewConfig} on:enter={viewHeader}>
+  <header class="centred slide" use:inview on:enter={viewHeader}>
     <h1>The Making Known</h1>
     <p>
       You will be led through observations, reflections, and movements selected
@@ -53,11 +54,11 @@ async function scrollToPlayer () {
   </header>
 
   <div id="player-carousel" class="slide carousel horizontal" class:snap={!scrollingPlayer} bind:this={playerCarousel}>
-    <div class="centred slide" use:inview={inviewConfig} on:enter={viewMenu}>
+    <div class="centred slide" use:inview on:enter={viewMenu}>
       <Menu on:select={handleSelect} />
     </div>
 
-    <div class="centred slide" use:inview={inviewConfig} on:enter={viewPlayer} bind:this={player}>
+    <div class="centred slide" use:inview on:enter={viewPlayer} bind:this={player}>
       <Player piece={currentPiece} />
     </div>
   </div>
