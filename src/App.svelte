@@ -65,8 +65,8 @@ async function scrollToPlayer () {
 
   <div class="background red" class:show={view === View.Menu}></div>
   <div class="background bg1" class:show={view === View.Player && currentPiece === Piece.Diana}></div>
-  <div class="background bg2" class:show={view === View.Player && currentPiece === Piece.Julia}></div>
-  <div class="background bg3" class:show={view === View.Player && currentPiece === Piece.Conny}></div>
+  <div class="background bg2" class:show={view === View.Player && currentPiece === Piece.Jane}></div>
+  <div class="background bg3" class:show={view === View.Player && currentPiece === Piece.Paul}></div>
 </main>
 
 <style>

@@ -5,15 +5,15 @@ export enum View {
 }
 
 export enum Piece {
+  Jane = 'jane',
   Diana = 'diana',
-  Julia = 'julia',
-  Conny = 'conny',
+  Paul = 'paul',
 }
 
 export function titleFor (piece: Piece): string {
   switch (piece) {
+    case Piece.Jane: return 'Dear Jane'
     case Piece.Diana: return 'Dear Diana'
-    case Piece.Julia: return 'Dear Julia'
-    case Piece.Conny: return 'Dear Conny'
+    case Piece.Paul: return 'Dear Paul'
   }
 }
