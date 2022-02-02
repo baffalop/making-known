@@ -2,7 +2,6 @@
 import { inview as baseInview } from 'svelte-inview'
 import { quartInOut } from 'svelte/easing'
 import { animateScroll } from 'svelte-scrollto-element'
-import { tick } from 'svelte'
 
 import { View, Piece } from './types'
 import Menu from './Menu.svelte'
@@ -29,16 +28,17 @@ function handleSelect ({ detail: { piece }}) {
 
 async function scrollToPlayer () {
   scrollingPlayer = true
-  await tick()
-  animateScroll.scrollTo({
-    container: playerCarousel,
-    element: player,
-    duration: 800,
-    easing: quartInOut,
-    scrollX: true,
-    scrollY: false,
-    onDone: () => scrollingPlayer = false,
-  })
+  window.requestAnimationFrame(
+    () => animateScroll.scrollTo({
+      container: playerCarousel,
+      element: player,
+      duration: 800,
+      easing: quartInOut,
+      scrollX: true,
+      scrollY: false,
+      onDone: () => scrollingPlayer = false,
+    })
+  )
 }
 </script>
 
