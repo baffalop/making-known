@@ -8,7 +8,7 @@ import Menu from './Menu.svelte'
 import Player from './Player.svelte'
 
 let view: View = View.Header
-let currentPiece: Piece = Piece.Diana
+let currentPiece: Piece = Piece.Jane
 let scrollingPlayer: boolean = false
 
 let playerCarousel: HTMLElement
