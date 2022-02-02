@@ -8,11 +8,25 @@ import Menu from './Menu.svelte'
 import Player from './Player.svelte'
 
 let view: View = View.Header
-let currentPiece: Piece = Piece.Jane
+
+let currentPiece: Piece = pieceFromHash()
 let scrollingPlayer: boolean = false
 
 let playerCarousel: HTMLElement
 let player: HTMLElement
+
+function pieceFromHash(): Piece {
+  switch (window.location.hash) {
+    case '#jane': return Piece.Jane
+    case '#diana': return Piece.Diana
+    case '#paul': return Piece.Paul
+    default: return Piece.Jane;
+  }
+}
+
+window.addEventListener('hashchange', () => {
+  currentPiece = pieceFromHash()
+})
 
 // wrapper for inview action with my config defaults
 const inview = node => baseInview(node, { threshold: 0.8 })
@@ -20,11 +34,6 @@ const inview = node => baseInview(node, { threshold: 0.8 })
 const viewHeader = () => view = View.Header
 const viewMenu = () => view = View.Menu
 const viewPlayer = () => view = View.Player
-
-function handleSelect ({ detail: { piece }}) {
-  currentPiece = piece
-  scrollToPlayer()
-}
 
 async function scrollToPlayer () {
   scrollingPlayer = true
@@ -55,7 +64,7 @@ async function scrollToPlayer () {
 
   <div id="player-carousel" class="slide carousel horizontal" class:snap={!scrollingPlayer} bind:this={playerCarousel}>
     <div class="centred slide" use:inview on:enter={viewMenu}>
-      <Menu on:select={handleSelect} />
+      <Menu on:select={scrollToPlayer} />
     </div>
 
     <div class="centred slide" use:inview on:enter={viewPlayer} bind:this={player}>
