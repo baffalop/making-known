@@ -14,19 +14,18 @@ let retrievedTime: number|null = null
 let interval: number|null = null
 
 $: playing = !paused
-$: progress = duration == 0 ? 0 : currentTime / duration
+$: progress = duration == 0 ? 0 : (retrievedTime ?? currentTime) / duration
 
+// on change of piece
 $: {
-  const parsed = parseFloat(window.localStorage.getItem(piece))
-  if (!isNaN(parsed)) {
-    retrievedTime = parsed
-  }
+  retrievedTime = retrievePlayPosition(piece)
+  paused = true
 }
 
 $: {
   if (playing) {
-    startTimeUpdate()
     assignRetrievedTime()
+    startTimeUpdate()
   } else {
     stopTimeUpdate()
   }
@@ -38,20 +37,25 @@ function togglePlay (): void {
 
 function ffw (): void {
   currentTime += skipInterval
-  saveTime()
+  storePlayPosition()
 }
 
 function rew (): void {
   currentTime -= skipInterval
-  saveTime()
+  storePlayPosition()
 }
 
-function saveTime (): void {
+function storePlayPosition (): void {
   window.localStorage.setItem(piece, currentTime.toString())
 }
 
+function retrievePlayPosition(piece: Piece): number|null {
+  const parsed = parseFloat(window.localStorage.getItem(piece))
+  return isNaN(parsed) ? null : parsed
+}
+
 function startTimeUpdate (): void {
-  interval = window.setInterval(saveTime, 1000)
+  interval = window.setInterval(storePlayPosition, 1000)
 }
 
 function stopTimeUpdate() {
