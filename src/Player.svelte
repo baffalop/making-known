@@ -19,7 +19,7 @@ $: progress = duration == 0 ? 0 : currentTime / duration
 $: {
   const parsed = parseFloat(window.localStorage.getItem(piece))
   if (!isNaN(parsed)) {
-    setRetrievedTime(parsed)
+    retrievedTime = parsed
   }
 }
 
@@ -59,10 +59,6 @@ function stopTimeUpdate() {
     window.clearInterval(interval)
     interval = null
   }
-}
-
-function setRetrievedTime(parsed: number) {
-  retrievedTime = parsed
 }
 
 function assignRetrievedTime (): void {
