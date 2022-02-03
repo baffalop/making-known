@@ -10,8 +10,27 @@ let currentTime = 0
 let paused = true
 let duration = 0
 
+let retrievedTime: number|null = null
+let interval: number|null = null
+
 $: playing = !paused
 $: progress = duration == 0 ? 0 : currentTime / duration
+
+$: {
+  const parsed = parseFloat(window.localStorage.getItem(piece))
+  if (!isNaN(parsed)) {
+    setRetrievedTime(parsed)
+  }
+}
+
+$: {
+  if (playing) {
+    startTimeUpdate()
+    assignRetrievedTime()
+  } else {
+    stopTimeUpdate()
+  }
+}
 
 function togglePlay (): void {
   paused = !paused
@@ -19,10 +38,38 @@ function togglePlay (): void {
 
 function ffw (): void {
   currentTime += skipInterval
+  saveTime()
 }
 
 function rew (): void {
   currentTime -= skipInterval
+  saveTime()
+}
+
+function saveTime (): void {
+  window.localStorage.setItem(piece, currentTime.toString())
+}
+
+function startTimeUpdate (): void {
+  interval = window.setInterval(saveTime, 1000)
+}
+
+function stopTimeUpdate() {
+  if (interval) {
+    window.clearInterval(interval)
+    interval = null
+  }
+}
+
+function setRetrievedTime(parsed: number) {
+  retrievedTime = parsed
+}
+
+function assignRetrievedTime (): void {
+  if (retrievedTime !== null) {
+    currentTime = retrievedTime
+    retrievedTime = null
+  }
 }
 </script>
 
