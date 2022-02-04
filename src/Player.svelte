@@ -10,11 +10,14 @@ let currentTime = 0
 let paused = true
 let duration = 0
 
-let retrievedTime: number|null = null
-let interval: number|null = null
-
 $: playing = !paused
 $: progress = duration == 0 ? 0 : (retrievedTime ?? currentTime) / duration
+
+// when retrieving play position from localStorage, we can't assign it
+// directly to currentTime as it gets overwritten on first play.
+// set it here then move the value to currentTime on play (via assignRetrievedTime)
+let retrievedTime: number|null = null
+let timeUpdateInterval: number|null = null
 
 // on change of piece
 $: {
@@ -55,13 +58,13 @@ function retrievePlayPosition(piece: Piece): number|null {
 }
 
 function startTimeUpdate (): void {
-  interval = window.setInterval(storePlayPosition, 1000)
+  timeUpdateInterval = window.setInterval(storePlayPosition, 1000)
 }
 
-function stopTimeUpdate() {
-  if (interval) {
-    window.clearInterval(interval)
-    interval = null
+function stopTimeUpdate(): void {
+  if (timeUpdateInterval) {
+    window.clearInterval(timeUpdateInterval)
+    timeUpdateInterval = null
   }
 }
 
