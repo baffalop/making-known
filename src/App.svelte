@@ -83,6 +83,7 @@ async function scrollToPlayer () {
   </div>
 </div>
 
+<div class="background main"></div>
 <div class="background red" class:show={viewingCarousel && !viewingPlayer}></div>
 <div class="background bg1" class:show={viewingPlayer && currentPiece === Piece.Dianna}></div>
 <div class="background bg2" class:show={viewingPlayer && currentPiece === Piece.Jane}></div>
@@ -151,8 +152,12 @@ h1 {
   background: #a6241d;
 }
 
-.background.grey {
-  background: linear-gradient(to right, #40444a, #6e7172 30%);
+.background.main {
+  background: url(img/bg-main.jpeg);
+  background-size: cover;
+  opacity: 1;
+  transition: none;
+  will-change: none;
 }
 
 .background.bg1 {

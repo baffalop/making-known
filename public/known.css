@@ -3,7 +3,7 @@ body {
   -webkit-user-select: text;
 
   color: #efcd89;
-  background: url('img/bg-main.jpeg') no-repeat fixed;
+  background: linear-gradient(to right, #40444a, #6e7172 30%);
   background-size: cover;
 
   font-size: calc(12pt + 2vmin);
