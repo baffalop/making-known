@@ -53,13 +53,16 @@ async function scrollToPlayer () {
 <main class="carousel snap vertical">
   <header class="centred slide" use:inview on:enter={viewHeader}>
     <h1>The Making Known</h1>
+  </header>
+
+  <div class="centred slide snap">
     <p>
       You will be led through observations, reflections, and movements selected
       randomly from an evolving collection of objects. The experience will last
       approximately sixty minutes. Please put on your headphones, turn off the
       ringer of your device, and when you are ready, scroll down to begin.
     </p>
-  </header>
+  </div>
 
   <div id="player-carousel" class="slide carousel horizontal" class:snap={!scrollingPlayer} bind:this={playerCarousel}>
     <div class="centred slide" use:inview on:enter={viewMenu}>
