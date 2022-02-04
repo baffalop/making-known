@@ -1,7 +1,7 @@
 export enum View {
-  Header = 'header',
-  Menu = 'menu',
-  Player = 'player',
+  Text,
+  Menu,
+  Player,
 }
 
 export enum Piece {

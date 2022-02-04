@@ -7,8 +7,7 @@ import { View, Piece } from './types'
 import Menu from './Menu.svelte'
 import Player from './Player.svelte'
 
-let view: View = View.Header
-
+let view: View = View.Text
 let currentPiece: Piece = pieceFromHash()
 let scrollingPlayer: boolean = false
 
@@ -31,7 +30,7 @@ window.addEventListener('hashchange', () => {
 // wrapper for inview action with my config defaults
 const inview = node => baseInview(node, { threshold: 0.8 })
 
-const viewHeader = () => view = View.Header
+const viewHeader = () => view = View.Text
 const viewMenu = () => view = View.Menu
 const viewPlayer = () => view = View.Player
 
