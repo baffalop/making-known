@@ -53,10 +53,10 @@ async function scrollToPlayer () {
 
 <div class="centred">
   <p>
-    You will be led through observations, reflections, and movements selected
-    randomly from an evolving collection of objects. The experience will last
-    approximately sixty minutes. Please put on your headphones, turn off the
-    ringer of your device, and when you are ready, scroll down to begin.
+    This is a narrated encounter with posters designed by the Nazi German government to communicate with the occupied nations of Belgium, France, and Luxembourg during the Second World War. The posters are part of the Tetlie Collection of WWII Propaganda Posters at the Flaten Art Museum in Northfield, Minnesota.
+  </p>
+  <p>
+    The encounter takes form through three audio letters written by the artist to individuals of relevance to the preservation and interpretation of the posters and their twenty-first century meaning: a curator, a paper conservator, and a poet. Each letter is experienced individually, and lasts between fifteen and twenty minutes. Please put on your headphones, turn off the ringer of your device, and when you are ready, scroll down to select one of the audio letters of The Making Known.
   </p>
 </div>
 
