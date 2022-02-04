@@ -18,7 +18,7 @@ let player: HTMLElement
 function pieceFromHash(): Piece {
   switch (window.location.hash) {
     case '#jane': return Piece.Jane
-    case '#diana': return Piece.Diana
+    case '#dianna': return Piece.Dianna
     case '#paul': return Piece.Paul
     default: return Piece.Jane;
   }
@@ -73,7 +73,7 @@ async function scrollToPlayer () {
   </div>
 
   <div class="background red" class:show={view === View.Menu}></div>
-  <div class="background bg1" class:show={view === View.Player && currentPiece === Piece.Diana}></div>
+  <div class="background bg1" class:show={view === View.Player && currentPiece === Piece.Dianna}></div>
   <div class="background bg2" class:show={view === View.Player && currentPiece === Piece.Jane}></div>
   <div class="background bg3" class:show={view === View.Player && currentPiece === Piece.Paul}></div>
 </main>

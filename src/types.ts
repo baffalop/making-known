@@ -6,14 +6,14 @@ export enum View {
 
 export enum Piece {
   Jane = 'jane',
-  Diana = 'diana',
+  Dianna = 'dianna',
   Paul = 'paul',
 }
 
 export function titleFor (piece: Piece): string {
   switch (piece) {
     case Piece.Jane: return 'Dear Jane'
-    case Piece.Diana: return 'Dear Diana'
+    case Piece.Dianna: return 'Dear Dianna'
     case Piece.Paul: return 'Dear Paul'
   }
 }

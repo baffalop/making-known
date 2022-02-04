@@ -10,7 +10,7 @@ function select () {
 </script>
 
 <ul>
-  {#each [Piece.Jane, Piece.Diana, Piece.Paul] as piece, i}
+  {#each [Piece.Jane, Piece.Dianna, Piece.Paul] as piece, i}
     <li style="--i: {i}">
       <a href="#{piece}" on:click={select}>No. {i + 1} {titleFor(piece)}</a>
     </li>

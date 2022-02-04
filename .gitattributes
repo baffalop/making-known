@@ -1,3 +1,4 @@
 public/audio/diana.mp3 filter=lfs diff=lfs merge=lfs -text
 public/audio/jane.mp3 filter=lfs diff=lfs merge=lfs -text
 public/audio/paul.mp3 filter=lfs diff=lfs merge=lfs -text
+public/audio/dianna.mp3 filter=lfs diff=lfs merge=lfs -text
