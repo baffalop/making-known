@@ -1,5 +1,5 @@
 <script lang="ts">
-import { inview as baseInview } from 'svelte-inview'
+import { inview } from 'svelte-inview'
 import { quartInOut } from 'svelte/easing'
 import { animateScroll } from 'svelte-scrollto-element'
 
@@ -7,8 +7,7 @@ import { View, Piece } from './types'
 import Menu from './Menu.svelte'
 import Player from './Player.svelte'
 
-let view: View = View.Header
-
+let view: View = View.Text
 let currentPiece: Piece = pieceFromHash()
 let scrollingPlayer: boolean = false
 
@@ -28,10 +27,7 @@ window.addEventListener('hashchange', () => {
   currentPiece = pieceFromHash()
 })
 
-// wrapper for inview action with my config defaults
-const inview = node => baseInview(node, { threshold: 0.8 })
-
-const viewHeader = () => view = View.Header
+const viewText = () => view = View.Text
 const viewMenu = () => view = View.Menu
 const viewPlayer = () => view = View.Player
 
@@ -51,22 +47,25 @@ async function scrollToPlayer () {
 }
 </script>
 
-<header class="centred slide snap" use:inview on:enter={viewHeader}>
+<header class="centred slide">
   <h1>The Making Known</h1>
+</header>
+
+<div class="centred">
   <p>
     You will be led through observations, reflections, and movements selected
     randomly from an evolving collection of objects. The experience will last
     approximately sixty minutes. Please put on your headphones, turn off the
     ringer of your device, and when you are ready, scroll down to begin.
   </p>
-</header>
+</div>
 
 <div class="slide snap carousel horizontal" bind:this={playerCarousel}>
-  <div class="centred slide" class:snap={!scrollingPlayer} use:inview on:enter={viewMenu}>
+  <div class="centred slide" class:snap={!scrollingPlayer} use:inview={{ threshold: 0.6 }} on:enter={viewMenu} on:leave={viewText}>
     <Menu on:select={scrollToPlayer} />
   </div>
 
-  <div class="centred slide" class:snap={!scrollingPlayer} use:inview on:enter={viewPlayer} bind:this={player}>
+  <div class="centred slide" class:snap={!scrollingPlayer} use:inview={{ threshold: 0.5 }} on:enter={viewPlayer} on:leave={viewText} bind:this={player}>
     <Player piece={currentPiece} />
   </div>
 </div>
@@ -118,7 +117,7 @@ h1 {
 }
 
 .background {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
