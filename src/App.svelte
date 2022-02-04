@@ -29,7 +29,7 @@ window.addEventListener('hashchange', () => {
 })
 
 // wrapper for inview action with my config defaults
-const inview = node => baseInview(node, { threshold: 0.6 })
+const inview = node => baseInview(node, { threshold: 0.8 })
 
 async function scrollToPlayer () {
   scrollingPlayer = true
