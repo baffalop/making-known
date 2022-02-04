@@ -1,13 +1,14 @@
 <script lang="ts">
-import { inview } from 'svelte-inview'
+import { inview as baseInview } from 'svelte-inview'
 import { quartInOut } from 'svelte/easing'
 import { animateScroll } from 'svelte-scrollto-element'
 
-import { View, Piece } from './types'
+import { Piece } from './types'
 import Menu from './Menu.svelte'
 import Player from './Player.svelte'
 
-let view: View = View.Text
+let viewingCarousel = false
+let viewingPlayer = false
 let currentPiece: Piece = pieceFromHash()
 let scrollingPlayer: boolean = false
 
@@ -27,9 +28,8 @@ window.addEventListener('hashchange', () => {
   currentPiece = pieceFromHash()
 })
 
-const viewText = () => view = View.Text
-const viewMenu = () => view = View.Menu
-const viewPlayer = () => view = View.Player
+// wrapper for inview action with my config defaults
+const inview = node => baseInview(node, { threshold: 0.6 })
 
 async function scrollToPlayer () {
   scrollingPlayer = true
@@ -60,20 +60,33 @@ async function scrollToPlayer () {
   </p>
 </div>
 
-<div class="slide snap carousel horizontal" bind:this={playerCarousel}>
-  <div class="centred slide" class:snap={!scrollingPlayer} use:inview={{ threshold: 0.6 }} on:enter={viewMenu} on:leave={viewText}>
+<div
+  class="slide snap carousel horizontal"
+  bind:this={playerCarousel}
+  use:inview
+  on:enter={() => viewingCarousel = true}
+  on:leave={() => viewingCarousel = false}
+>
+  <div class="centred slide" class:snap={!scrollingPlayer}>
     <Menu on:select={scrollToPlayer} />
   </div>
 
-  <div class="centred slide" class:snap={!scrollingPlayer} use:inview={{ threshold: 0.5 }} on:enter={viewPlayer} on:leave={viewText} bind:this={player}>
+  <div
+    class="centred slide"
+    class:snap={!scrollingPlayer}
+    bind:this={player}
+    use:inview
+    on:enter={() => viewingPlayer = true}
+    on:leave={() => viewingPlayer = false}
+  >
     <Player piece={currentPiece} />
   </div>
 </div>
 
-<div class="background red" class:show={view === View.Menu}></div>
-<div class="background bg1" class:show={view === View.Player && currentPiece === Piece.Dianna}></div>
-<div class="background bg2" class:show={view === View.Player && currentPiece === Piece.Jane}></div>
-<div class="background bg3" class:show={view === View.Player && currentPiece === Piece.Paul}></div>
+<div class="background red" class:show={viewingCarousel && !viewingPlayer}></div>
+<div class="background bg1" class:show={viewingPlayer && currentPiece === Piece.Dianna}></div>
+<div class="background bg2" class:show={viewingPlayer && currentPiece === Piece.Jane}></div>
+<div class="background bg3" class:show={viewingPlayer && currentPiece === Piece.Paul}></div>
 
 <style>
 .carousel {
