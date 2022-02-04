@@ -3,11 +3,12 @@ import { inview as baseInview } from 'svelte-inview'
 import { quartInOut } from 'svelte/easing'
 import { animateScroll } from 'svelte-scrollto-element'
 
-import { View, Piece } from './types'
+import { Piece } from './types'
 import Menu from './Menu.svelte'
 import Player from './Player.svelte'
 
-let view: View = View.Text
+let viewingCarousel = false
+let viewingPlayer = false
 let currentPiece: Piece = pieceFromHash()
 let scrollingPlayer: boolean = false
 
@@ -28,11 +29,7 @@ window.addEventListener('hashchange', () => {
 })
 
 // wrapper for inview action with my config defaults
-const inview = node => baseInview(node, { threshold: 0.8 })
-
-const viewHeader = () => view = View.Text
-const viewMenu = () => view = View.Menu
-const viewPlayer = () => view = View.Player
+const inview = node => baseInview(node, { threshold: 0.6 })
 
 async function scrollToPlayer () {
   scrollingPlayer = true
@@ -51,7 +48,7 @@ async function scrollToPlayer () {
 </script>
 
 <main class="carousel snap vertical">
-  <header class="centred slide" use:inview on:enter={viewHeader}>
+  <header class="centred slide">
     <h1>The Making Known</h1>
   </header>
 
@@ -64,20 +61,33 @@ async function scrollToPlayer () {
     </p>
   </div>
 
-  <div id="player-carousel" class="slide carousel horizontal" class:snap={!scrollingPlayer} bind:this={playerCarousel}>
-    <div class="centred slide" use:inview on:enter={viewMenu}>
+  <div
+    class="slide carousel horizontal"
+    class:snap={!scrollingPlayer}
+    bind:this={playerCarousel}
+    use:inview
+    on:enter={() => viewingCarousel = true}
+    on:leave={() => viewingCarousel = false}
+  >
+    <div class="centred slide">
       <Menu on:select={scrollToPlayer} />
     </div>
 
-    <div class="centred slide" use:inview on:enter={viewPlayer} bind:this={player}>
+    <div
+      class="centred slide"
+      bind:this={player}
+      use:inview
+      on:enter={() => viewingPlayer = true}
+      on:leave={() => viewingPlayer = false}
+    >
       <Player piece={currentPiece} />
     </div>
   </div>
 
-  <div class="background red" class:show={view === View.Menu}></div>
-  <div class="background bg1" class:show={view === View.Player && currentPiece === Piece.Dianna}></div>
-  <div class="background bg2" class:show={view === View.Player && currentPiece === Piece.Jane}></div>
-  <div class="background bg3" class:show={view === View.Player && currentPiece === Piece.Paul}></div>
+  <div class="background red" class:show={viewingCarousel && !viewingPlayer}></div>
+  <div class="background bg1" class:show={viewingPlayer && currentPiece === Piece.Dianna}></div>
+  <div class="background bg2" class:show={viewingPlayer && currentPiece === Piece.Jane}></div>
+  <div class="background bg3" class:show={viewingPlayer && currentPiece === Piece.Paul}></div>
 </main>
 
 <style>
