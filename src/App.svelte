@@ -49,7 +49,7 @@ async function scrollToPlayer () {
 
 <main class="carousel snap vertical">
   <header class="centred slide">
-    <h1>The Making Known</h1>
+    <img class="title" src="img/title.png" alt="The Making Known" />
   </header>
 
   <div class="centred slide snap">
@@ -129,6 +129,11 @@ async function scrollToPlayer () {
 h1 {
   text-align: center;
   font-style: italic;
+}
+
+.title {
+  max-height: 70%;
+  max-width: 90%;
 }
 
 .background {
