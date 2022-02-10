@@ -78,12 +78,14 @@ function assignRetrievedTime (): void {
 
 <audio src="audio/{piece}.mp3" bind:currentTime bind:paused bind:duration></audio>
 
-<h1>{titleFor(piece)}</h1>
+<img src="img/{piece}.png" alt={titleFor(piece)} class="title">
+
 <div class="controls">
   <button class="rew" on:click={rew}></button>
   <button class="play-pause" class:playing on:click={togglePlay}></button>
   <button class="ffw" on:click={ffw}></button>
 </div>
+
 <Timeline {progress} {playing} />
 
 <style>
@@ -92,6 +94,11 @@ function assignRetrievedTime (): void {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.title {
+  height: 7em;
+  margin-bottom: 1em;
 }
 
 button {
@@ -115,7 +122,7 @@ button:active {
 }
 
 button.play-pause {
-  width: 5em;
+  width: 8em;
   height: 2.5em;
   background-image: url(img/play-pause.png);
   background-size: 100% auto;
