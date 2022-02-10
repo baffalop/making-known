@@ -102,6 +102,7 @@ function assignRetrievedTime (): void {
 }
 
 button {
+  -webkit-tap-highlight-color: transparent;
   font-size: 100%;
   border: 0;
   outline: 0;
