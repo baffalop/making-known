@@ -1,3 +1,9 @@
+html, body { /* disable scrolling */
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
   -webkit-user-select: text;
@@ -8,10 +14,6 @@ body {
   background-size: cover;
 
   font-size: calc(12pt + 2vmin);
-
-  margin: 0;
-  height: 100%;
-  width: 100%;
 }
 
 p {
