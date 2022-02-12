@@ -54,7 +54,7 @@ function range (n: number): number[] {
 }
 
 .blip.lit {
-  background-color: #ffffda;
+  background-color: #e9e9cbcc;
 }
 
 .blip.big {
