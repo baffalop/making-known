@@ -34,10 +34,9 @@ function range (n: number): number[] {
 
 <style>
 .timeline {
-  transform: rotate(-8deg);
+  transform: rotate(-5deg);
   height: 30px;
   width: 12em;
-  margin-top: 1em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

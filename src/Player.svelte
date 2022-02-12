@@ -80,16 +80,17 @@ function assignRetrievedTime (): void {
 
 <img src="img/{piece}.png" alt={titleFor(piece)} class="title">
 
+<Timeline {progress} {playing} />
+
 <div class="controls">
   <button class="rew" on:click={rew}></button>
   <button class="play-pause" class:playing on:click={togglePlay}></button>
   <button class="ffw" on:click={ffw}></button>
 </div>
 
-<Timeline {progress} {playing} />
-
 <style>
 .controls {
+  margin-top: 1em;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -99,7 +100,7 @@ function assignRetrievedTime (): void {
 
 .title {
   height: 7em;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
 }
 
 button {
