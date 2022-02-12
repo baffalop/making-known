@@ -9,9 +9,9 @@ import Player from './Player.svelte'
 
 let view: View = View.Text
 let currentPiece: Piece = pieceFromHash()
-let scrollingPlayer: boolean = false
+let autoscrolling: boolean = false
 
-let playerCarousel: HTMLElement
+let carousel: HTMLElement
 let player: HTMLElement
 
 function pieceFromHash(): Piece {
@@ -30,32 +30,38 @@ window.addEventListener('hashchange', () => {
 // wrapper for inview action with my config defaults
 const inview = node => baseInview(node, { threshold: 0.8 })
 
-const viewHeader = () => view = View.Text
+const viewText = () => view = View.Text
 const viewMenu = () => view = View.Menu
 const viewPlayer = () => view = View.Player
 
 async function scrollToPlayer () {
-  scrollingPlayer = true
+  autoscrolling = true
   window.requestAnimationFrame(
     () => animateScroll.scrollTo({
-      container: playerCarousel,
+      container: carousel,
       element: player,
       duration: 800,
       easing: quartInOut,
       scrollX: true,
       scrollY: false,
-      onDone: () => scrollingPlayer = false,
+      onDone: () => autoscrolling = false,
     })
   )
 }
 </script>
 
-<main class="carousel snap vertical">
+<main
+  class="carousel horizontal"
+  class:snap={!autoscrolling}
+  bind:this={carousel}
+  use:inview
+  on:enter={viewText}
+>
   <header class="centred slide">
     <img class="title" src="img/title.png" alt="The Making Known" />
   </header>
 
-  <div class="centred slide snap">
+  <div class="centred slide" use:inview on:enter={viewText}>
     <p>
       You will be led through observations, reflections, and movements selected
       randomly from an evolving collection of objects. The experience will last
@@ -64,14 +70,12 @@ async function scrollToPlayer () {
     </p>
   </div>
 
-  <div class="slide carousel horizontal" class:snap={!scrollingPlayer} bind:this={playerCarousel}>
-    <div class="centred slide" use:inview on:enter={viewMenu}>
-      <Menu on:select={scrollToPlayer} />
-    </div>
+  <div class="centred slide" use:inview on:enter={viewMenu}>
+    <Menu on:select={scrollToPlayer} />
+  </div>
 
-    <div class="centred slide" use:inview on:enter={viewPlayer} bind:this={player}>
-      <Player piece={currentPiece} />
-    </div>
+  <div class="centred slide" use:inview on:enter={viewPlayer} bind:this={player}>
+    <Player piece={currentPiece} />
   </div>
 
   <div class="background red" class:show={view === View.Menu}></div>
