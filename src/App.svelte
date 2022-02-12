@@ -8,6 +8,9 @@ import { View, Piece } from './types'
 import Menu from './Menu.svelte'
 import Player from './Player.svelte'
 
+const introScrollWaitTime = 2000
+const autoScrollSpeedSlow = 1400
+
 const navigatedPiece: Piece|null = pieceFromHash()
 
 let view: View = View.Text
@@ -20,14 +23,14 @@ let carousel: HTMLElement
 let introText: HTMLElement
 let player: HTMLElement
 
-onMount(() => window.setTimeout(introScroll, 2000))
+onMount(() => window.setTimeout(introScroll, introScrollWaitTime))
 
 function introScroll () {
   if (!userHasScrolled) {
     if (navigatedPiece !== null) {
-      scrollTo(player, 1400)
+      scrollTo(player, autoScrollSpeedSlow)
     } else {
-      scrollTo(introText, 1400)
+      scrollTo(introText, autoScrollSpeedSlow)
     }
   }
 }
