@@ -1,3 +1,9 @@
+export enum View {
+  Text,
+  Menu,
+  Player,
+}
+
 export enum Piece {
   Jane = 'jane',
   Dianna = 'dianna',
