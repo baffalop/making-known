@@ -44,18 +44,17 @@ function range (n: number): number[] {
 }
 
 .blip {
-  display: flex;
   border-radius: 100%;
   height: 5px;
   width: 5px;
-  background-color: #bbb;
+  background-color: #565146b8;
   transition-property: background-color, height, width;
   transition-duration: 300ms;
   transition-timing-function: ease-out;
 }
 
 .blip.lit {
-  background-color: white;
+  background-color: #ffffda;
 }
 
 .blip.big {
