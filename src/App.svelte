@@ -12,12 +12,16 @@ let view: View = View.Text
 let currentPiece: Piece = pieceFromHash()
 
 let autoscrolling: boolean = false
+let userHasScrolled: boolean = false
 
 let carousel: HTMLElement
 let introText: HTMLElement
 let player: HTMLElement
 
-onMount(() => window.setTimeout(() => scrollTo(introText, 1400), 2000))
+onMount(() => window.setTimeout(
+  () => userHasScrolled || scrollTo(introText, 1400),
+  2000
+))
 
 function pieceFromHash(): Piece {
   switch (window.location.hash) {
@@ -39,7 +43,7 @@ const viewText = () => view = View.Text
 const viewMenu = () => view = View.Menu
 const viewPlayer = () => view = View.Player
 
-async function scrollTo (target: HTMLElement, duration = 800) {
+function scrollTo (target: HTMLElement, duration = 800) {
   autoscrolling = true
   window.requestAnimationFrame(
     () => animateScroll.scrollTo({
@@ -62,11 +66,11 @@ async function scrollTo (target: HTMLElement, duration = 800) {
   use:inview
   on:enter={viewText}
 >
-  <header class="centred slide">
+  <header class="centred slide" use:inview on:leave={() => userHasScrolled = true}>
     <img class="title" src="img/title.png" alt="The Making Known" />
   </header>
 
-  <div class="centred slide" use:inview on:enter={viewText} bind:this={introText}>
+  <div class="centred slide" bind:this={introText} use:inview on:enter={viewText}>
     <div class="text">
       <p>
         This is a narrated encounter with posters designed by the Nazi German government to communicate with the
