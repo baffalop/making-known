@@ -13,7 +13,7 @@ body {
   background: url('img/bg-main.jpeg') no-repeat;
   background-size: cover;
 
-  font-size: calc(12pt + 2vmin);
+  font-size: calc(11pt + 1.75vmin);
 }
 
 .text {
