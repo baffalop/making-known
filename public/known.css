@@ -2,7 +2,8 @@ body {
   -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
   -webkit-user-select: text;
 
-  color: #efcd89;
+  --text-color: #ffebb1;
+  color: var(--text-color);
   background: url('img/bg-main.jpeg') no-repeat;
   background-size: cover;
 
@@ -19,7 +20,7 @@ p {
 }
 
 a {
-  color: #efcd89;
+  color: var(--text-color);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.3ex;
 }
