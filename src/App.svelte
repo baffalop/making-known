@@ -1,4 +1,5 @@
 <script lang="ts">
+import { onMount } from 'svelte'
 import { inview as baseInview } from 'svelte-inview'
 import { quartInOut } from 'svelte/easing'
 import { animateScroll } from 'svelte-scrollto-element'
@@ -9,10 +10,14 @@ import Player from './Player.svelte'
 
 let view: View = View.Text
 let currentPiece: Piece = pieceFromHash()
+
 let autoscrolling: boolean = false
 
 let carousel: HTMLElement
+let introText: HTMLElement
 let player: HTMLElement
+
+onMount(() => window.setTimeout(() => scrollTo(introText, 1400), 2000))
 
 function pieceFromHash(): Piece {
   switch (window.location.hash) {
@@ -34,13 +39,13 @@ const viewText = () => view = View.Text
 const viewMenu = () => view = View.Menu
 const viewPlayer = () => view = View.Player
 
-async function scrollToPlayer () {
+async function scrollTo (target: HTMLElement, duration = 800) {
   autoscrolling = true
   window.requestAnimationFrame(
     () => animateScroll.scrollTo({
       container: carousel,
-      element: player,
-      duration: 800,
+      element: target,
+      duration,
       easing: quartInOut,
       scrollX: true,
       scrollY: false,
@@ -61,7 +66,7 @@ async function scrollToPlayer () {
     <img class="title" src="img/title.png" alt="The Making Known" />
   </header>
 
-  <div class="centred slide" use:inview on:enter={viewText}>
+  <div class="centred slide" use:inview on:enter={viewText} bind:this={introText}>
     <div class="text">
       <p>
         This is a narrated encounter with posters designed by the Nazi German government to communicate with the
@@ -80,7 +85,7 @@ async function scrollToPlayer () {
   </div>
 
   <div class="centred slide" use:inview on:enter={viewMenu}>
-    <Menu on:select={scrollToPlayer} />
+    <Menu on:select={() => scrollTo(player)} />
   </div>
 
   <div class="centred slide" use:inview on:enter={viewPlayer} bind:this={player}>
