@@ -8,8 +8,10 @@ import { View, Piece } from './types'
 import Menu from './Menu.svelte'
 import Player from './Player.svelte'
 
+const navigatedPiece: Piece|null = pieceFromHash()
+
 let view: View = View.Text
-let currentPiece: Piece = pieceFromHash()
+let currentPiece: Piece = navigatedPiece || Piece.Jane
 
 let autoscrolling: boolean = false
 let userHasScrolled: boolean = false
@@ -18,30 +20,40 @@ let carousel: HTMLElement
 let introText: HTMLElement
 let player: HTMLElement
 
-onMount(() => window.setTimeout(
-  () => userHasScrolled || scrollTo(introText, 1400),
-  2000
-))
+onMount(() => window.setTimeout(introScroll, 2000))
 
-function pieceFromHash(): Piece {
+function introScroll () {
+  if (!userHasScrolled) {
+    if (navigatedPiece !== null) {
+      scrollTo(player, 1400)
+    } else {
+      scrollTo(introText, 1400)
+    }
+  }
+}
+
+function pieceFromHash(): Piece|null {
   switch (window.location.hash) {
     case '#jane': return Piece.Jane
     case '#dianna': return Piece.Dianna
     case '#paul': return Piece.Paul
-    default: return Piece.Jane;
+    default: return null
   }
 }
 
 window.addEventListener('hashchange', () => {
-  currentPiece = pieceFromHash()
+  currentPiece = pieceFromHash() || Piece.Jane
 })
 
 // wrapper for inview action with my config defaults
 const inview = node => baseInview(node, { threshold: 0.8 })
 
 const viewText = () => view = View.Text
-const viewMenu = () => view = View.Menu
 const viewPlayer = () => view = View.Player
+const viewMenu = () => {
+  // the menu's red can flash by if autoscrolling past it from title on load
+  if (!autoscrolling) view = View.Menu
+}
 
 function scrollTo (target: HTMLElement, duration = 800) {
   autoscrolling = true
