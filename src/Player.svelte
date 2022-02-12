@@ -93,7 +93,8 @@ function assignRetrievedTime (): void {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  width: 12.5em;
 }
 
 .title {
@@ -113,13 +114,8 @@ button {
   transition: opacity 80ms ease-in 100ms;
 
   cursor: pointer;
-  height: 2.5em;
-  width: 3em;
-}
-
-button:active {
-  transition: none;
-  opacity: 0.5;
+  height: 1.5em;
+  width: 1.75em;
 }
 
 button.play-pause {
@@ -135,11 +131,18 @@ button.play-pause.playing {
 
 button.ffw {
   background-image: url(img/ffw.png);
-  background-size: contain;
+  opacity: 0.85;
+  margin-bottom: 0.7em;
 }
 
 button.rew {
   background-image: url(img/rew.png);
-  background-size: contain;
+  opacity: 0.85;
+  margin-top: 0.7em;
+}
+
+button:active {
+  transition: none;
+  opacity: 0.5;
 }
 </style>
