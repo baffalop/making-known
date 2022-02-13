@@ -189,10 +189,6 @@ h1 {
   background: #a6241d;
 }
 
-.background.grey {
-  background: linear-gradient(to right, #40444a, #6e7172 30%);
-}
-
 .background.bg1 {
   background-image: url(img/bg1.jpeg);
 }
