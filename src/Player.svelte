@@ -78,7 +78,7 @@ function assignRetrievedTime (): void {
 
 <audio src="audio/{piece}.mp3" bind:currentTime bind:paused bind:duration></audio>
 
-<img src="img/{piece}.png" alt={titleFor(piece)} class="title">
+<img src="img/title-{piece}.png" alt={titleFor(piece)} class="title">
 
 <Timeline {progress} {playing} />
 
