@@ -196,6 +196,7 @@ h1 {
 
 .background.dianna {
   background-image: url(img/bg2.jpeg);
+  background-position: 80% 80%;
 }
 
 .background.paul {
