@@ -16,14 +16,18 @@ const navigatedPiece: Piece|null = pieceFromHash()
 let view: View = View.Text
 let currentPiece: Piece = navigatedPiece || Piece.Jane
 
-let autoscrolling: boolean = false
-let userHasScrolled: boolean = false
+let loaded = false
+let itsTimeToScrollToIntro = false
+let userHasScrolled = false
+let autoscrolling = false
 
 let carousel: HTMLElement
 let introText: HTMLElement
 let player: HTMLElement
 
-onMount(() => window.setTimeout(introScroll, introScrollWaitTime))
+onMount(() => window.setTimeout(() => itsTimeToScrollToIntro = true, introScrollWaitTime))
+window.onload = () => loaded = true
+$: if (loaded && itsTimeToScrollToIntro) introScroll()
 
 function introScroll () {
   if (!userHasScrolled) {
