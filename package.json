@@ -5,6 +5,7 @@
     "test": "web-test-runner \"src/**/*.test.ts\""
   },
   "dependencies": {
+    "snifferjs": "^4.1.0",
     "svelte": "^3.37.0",
     "svelte-inview": "^2.1.1",
     "svelte-scrollto-element": "^0.7.0"

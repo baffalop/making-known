@@ -4,6 +4,8 @@ import { inview as baseInview } from 'svelte-inview'
 import { quartInOut } from 'svelte/easing'
 import { animateScroll } from 'svelte-scrollto-element'
 
+import Sniffer from 'snifferjs'
+
 import { View, Piece } from './types'
 import Menu from './Menu.svelte'
 import Player from './Player.svelte'
@@ -12,6 +14,10 @@ const introScrollWaitTime = 2000
 const autoScrollSpeedSlow = 1400
 
 const navigatedPiece: Piece|null = pieceFromHash()
+
+const sniffer = Sniffer(navigator.userAgent)
+const isLegacySafari = (sniffer.os.name === 'ios' && sniffer.os.majorVersion < 15)
+  || (sniffer.browser.name === 'safari' && sniffer.browser.majorVersion < 15)
 
 let view: View = View.Text
 let currentPiece: Piece = navigatedPiece || Piece.Jane
@@ -63,7 +69,8 @@ const viewMenu = () => {
 }
 
 function scrollTo (target: HTMLElement, duration = 800) {
-  autoscrolling = true
+  if (!isLegacySafari) autoscrolling = true
+
   window.requestAnimationFrame(
     () => animateScroll.scrollTo({
       container: carousel,

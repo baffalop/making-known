@@ -12,6 +12,7 @@ specifiers:
   '@types/snowpack-env': ^2.3.3
   '@web/test-runner': ^0.13.3
   chai: ^4.3.4
+  snifferjs: ^4.1.0
   snowpack: ^3.8.7
   svelte: ^3.37.0
   svelte-hmr: ^0.14.9
@@ -21,6 +22,7 @@ specifiers:
   typescript: ^4.3.4
 
 dependencies:
+  snifferjs: 4.1.0
   svelte: 3.46.2
   svelte-inview: 2.1.1_svelte@3.46.2
   svelte-scrollto-element: 0.7.0_svelte@3.46.2
@@ -3873,6 +3875,10 @@ packages:
     resolution: {integrity: sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==}
     engines: {node: '>= 6.0.0', npm: '>= 3.0.0'}
     dev: true
+
+  /snifferjs/4.1.0:
+    resolution: {integrity: sha512-YMN6B/uvoMs4E+sjMy/YRKwGorb7OytTjoLkkxfdOGEFOwdckVh/2XcR6svnGWN1vSrvyZm+HwxrmxvVxPxZ0Q==}
+    dev: false
 
   /snowpack/3.8.8:
     resolution: {integrity: sha512-Y/4V8FdzzYpwmJU2TgXRRFytz+GFSliWULK9J5O6C72KyK60w20JKqCdRtVs1S6BuobCedF5vSBD1Gvtm+gsJg==}
