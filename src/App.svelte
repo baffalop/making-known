@@ -211,17 +211,17 @@ h1 {
 }
 
 .background.jane {
-  background-image: url(img/bg3.jpeg);
+  background-image: url(img/bg-jane.jpeg);
   background-position: 32% 0;
 }
 
 .background.dianna {
-  background-image: url(img/bg2.jpeg);
+  background-image: url(img/bg-dianna.jpeg);
   background-position: 80% 80%;
 }
 
 .background.paul {
-  background-image: url(img/bg1.jpeg);
+  background-image: url(img/bg-paul.jpeg);
   background-position: 0 0;
 }
 </style>
