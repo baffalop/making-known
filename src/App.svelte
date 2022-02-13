@@ -116,9 +116,9 @@ function scrollTo (target: HTMLElement, duration = 800) {
   </div>
 
   <div class="background red" class:show={view === View.Menu}></div>
-  <div class="background bg1" class:show={view === View.Player && currentPiece === Piece.Dianna}></div>
-  <div class="background bg2" class:show={view === View.Player && currentPiece === Piece.Jane}></div>
-  <div class="background bg3" class:show={view === View.Player && currentPiece === Piece.Paul}></div>
+  <div class="background jane" class:show={view === View.Player && currentPiece === Piece.Jane}></div>
+  <div class="background dianna" class:show={view === View.Player && currentPiece === Piece.Dianna}></div>
+  <div class="background paul" class:show={view === View.Player && currentPiece === Piece.Paul}></div>
 </main>
 
 <style>
@@ -189,15 +189,16 @@ h1 {
   background: #a6241d;
 }
 
-.background.bg1 {
-  background-image: url(img/bg1.jpeg);
+.background.jane {
+  background-image: url(img/bg3.jpeg);
+  background-position: 32% 0;
 }
 
-.background.bg2 {
+.background.dianna {
   background-image: url(img/bg2.jpeg);
 }
 
-.background.bg3 {
-  background-image: url(img/bg3.jpeg);
+.background.paul {
+  background-image: url(img/bg1.jpeg);
 }
 </style>
