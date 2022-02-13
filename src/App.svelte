@@ -201,5 +201,6 @@ h1 {
 
 .background.paul {
   background-image: url(img/bg1.jpeg);
+  background-position: 65% 0;
 }
 </style>
