@@ -5,8 +5,6 @@ export let piece: Piece
 </script>
 
 {#if piece === Piece.Jane}
-  <h3>Dear Jane (Letter to a Curator)</h3>
-
   <h4>Narration</h4>
   <p>Benny Nemer, Shea Lime, Timothy Rainey II</p>
 
@@ -24,8 +22,6 @@ export let piece: Piece
   <p>Jeffrey O’Donnell and Joshua Wyatt</p>
 
 {:else if piece === Piece.Dianna}
-  <h3>Dear Dianna (Letter to a Paper Conservator)</h3>
-
   <h4>Narration</h4>
   <p>Benny Nemer, Shea Lime, Timothy Rainey II</p>
 
@@ -42,8 +38,6 @@ export let piece: Piece
   <p>Jim Loveland and Tyler Thomas</p>
 
 {:else if piece === Piece.Paul}
-  <h3>Dear Paul (Letter to a Poet)</h3>
-
   <h4>Narration</h4>
   <p>Benny Nemer, Shea Lime, Timothy Rainey II</p>
 
@@ -70,13 +64,12 @@ export let piece: Piece
   text-align: center;
 }
 
-h3 {
-  text-align: center;
-}
-
 h4 {
+  font-size: 1.2em;
   line-height: 1em;
-  margin-block-end: 0;
+  margin-block-end: 0.6em;
+  font-style: italic;
+  font-weight: normal;
 }
 
 h4 + p {
