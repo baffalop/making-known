@@ -119,7 +119,7 @@ function scrollTo (target: HTMLElement, duration = 800) {
   </div>
 
   <div class="centred slide" use:inview on:enter={viewPlayer} bind:this={player}>
-    <Player piece={currentPiece} />
+    <Player piece={currentPiece} isInView={view === View.Player} />
   </div>
 
   <div class="centred slide" use:inview on:enter={viewText}>

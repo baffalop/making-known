@@ -10,6 +10,7 @@ import { fadeAndScale, ondestroy } from './transition'
 const skipInterval = 10
 
 export let piece: Piece
+export let isInView: boolean
 
 let viewingCredits = false
 
@@ -43,10 +44,6 @@ $: {
 }
 
 // properties for the fadeAndScale transition
-const uiFadeDuration = 300
-const creditsFadeInDuration = 800
-const creditsFadeOutDuration = 600
-
 let ui: HTMLElement
 let uiHeight: number
 $: if (ui) uiHeight = parseFloat(getComputedStyle(ui).height.replace('px', ''))
@@ -54,6 +51,10 @@ let suspendCredits = true
 $: if (!viewingCredits) suspendCredits = true
 let suspendUi = false
 $: if (viewingCredits) suspendUi = true
+
+const creditsFadeInDuration = 800
+$: creditsFadeOutDuration = isInView ? 600 : 0
+$: uiFadeDuration = isInView ? 300 : 0
 
 function togglePlay (): void {
   paused = !paused
