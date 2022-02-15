@@ -4,7 +4,7 @@ import { inview as baseInview } from 'svelte-inview'
 import { quartInOut } from 'svelte/easing'
 import { animateScroll } from 'svelte-scrollto-element'
 
-import Sniffer from 'snifferjs'
+import sniffer from 'snifferjs'
 
 import { View, Piece } from './types'
 import Menu from './Menu.svelte'
@@ -15,9 +15,9 @@ const autoScrollSpeedSlow = 1400
 
 const navigatedPiece: Piece|null = pieceFromHash()
 
-const sniffer = Sniffer(navigator.userAgent)
-const isLegacySafari = (sniffer.os.name === 'ios' && sniffer.os.majorVersion < 15)
-  || (sniffer.browser.name === 'safari' && sniffer.browser.majorVersion < 15)
+const sniffed = sniffer(navigator.userAgent)
+const isLegacySafari = (sniffed.os.name === 'ios' && sniffed.os.majorVersion < 15)
+  || (sniffed.browser.name === 'safari' && sniffed.browser.majorVersion < 15)
 
 let view: View = View.Text
 let currentPiece: Piece = navigatedPiece || Piece.Jane
