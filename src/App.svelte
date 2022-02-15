@@ -109,7 +109,7 @@ function scrollTo (target: HTMLElement, duration = 800) {
         preservation and interpretation of the posters and their twenty-first century meaning: a curator, a paper
         conservator, and a poet. Each letter is experienced individually, and lasts between fifteen and twenty minutes.
         Please put on your headphones, turn off the ringer of your device, and when you are ready, swipe right to select
-        one of the audio letters of The Making Known.
+        one of the audio letters of <em>The Making Known</em>.
       </p>
     </div>
   </div>
@@ -125,10 +125,10 @@ function scrollTo (target: HTMLElement, duration = 800) {
   <div class="centred slide" use:inview on:enter={viewText}>
     <div class="text">
       <p>
-        The Making Known was written and created by Benny Nemer to accompany a scenography of a flowers, paper mobiles,
-        and a selection of posters from the Tetlie Collection, which were exhibited in a solo exhibition with the same
-        title at the Flaten Art Museum in the winter of 2022. The project was commissioned by museum Director and
-        Curator Jane Becker Nelson with financial support from (Can’t Remember Right Now), and research and exhibition
+        <em>The Making Known</em> was written and created by Benny Nemer to accompany a scenography of a flowers, paper
+        mobiles, and a selection of posters from the Tetlie Collection, which were exhibited in a solo exhibition with
+        the same title at the Flaten Art Museum in the winter of 2022. The project was commissioned by museum Director
+        and Curator Jane Becker Nelson with financial support from (Can’t Remember Right Now), and research and exhibition
         assistance from Mona Weselman and Krista Anderson-Larson. Website programming by Nikita Gaidakov.
       </p>
     </div>
