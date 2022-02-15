@@ -127,9 +127,11 @@ function assignRetrievedTime (): void {
     <Timeline {progress} {playing}/>
 
     <div class="controls">
-      <button class="rew" on:click={rew}></button>
-      <button class="play-pause" class:playing class:waiting on:click={togglePlay}></button>
-      <button class="ffw" on:click={ffw}></button>
+      <button class="rew" on:click={rew}>Rewind</button>
+      <button class="play-pause" class:playing class:waiting on:click={togglePlay}>
+        {playing ? 'Pause' : 'Play'}
+      </button>
+      <button class="ffw" on:click={ffw}>Fast forward</button>
     </div>
   </div>
 {:else}
