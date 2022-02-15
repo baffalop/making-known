@@ -1,10 +1,16 @@
 <script lang="ts">
+import { fade } from 'svelte/transition'
+import { quartInOut } from 'svelte/easing'
+
 import { Piece, titleFor } from './types'
 import Timeline from './Timeline.svelte'
+import { fadeAndScale, ondestroy } from './transition'
+
+const skipInterval = 10
 
 export let piece: Piece
 
-const skipInterval = 10
+let viewingCredits = false
 
 let currentTime = 0
 let paused = true
@@ -23,6 +29,7 @@ let timeUpdateInterval: number|null = null
 $: {
   retrievedTime = retrievePlayPosition(piece)
   paused = true
+  viewingCredits = false
 }
 
 $: {
@@ -33,6 +40,11 @@ $: {
     stopTimeUpdate()
   }
 }
+
+// properties for the fadeAndScale transition
+let ui: HTMLElement
+let suspendCredits = true
+$: if (!viewingCredits) suspendCredits = true
 
 function togglePlay (): void {
   paused = !paused
@@ -76,17 +88,46 @@ function assignRetrievedTime (): void {
 }
 </script>
 
-<audio src="audio/{piece}.mp3" bind:currentTime bind:paused bind:duration></audio>
+<audio
+  src="audio/{piece}.mp3"
+  bind:currentTime
+  bind:paused
+  bind:duration
+  on:ended={() => window.setTimeout(() => viewingCredits = true, 1000)}
+></audio>
 
-<img src="img/title-{piece}.png" alt={titleFor(piece)} class="title">
+<img
+  src="img/title-{piece}.png"
+  alt={titleFor(piece)}
+  class="title"
+  on:click={() => viewingCredits = !viewingCredits}
+/>
 
-<Timeline {progress} {playing} />
+{#if !viewingCredits}
+  <div out:fade={{ duration: 300 }} bind:this={ui} use:ondestroy={() => suspendCredits = false}>
+    <Timeline {progress} {playing}/>
 
-<div class="controls">
-  <button class="rew" on:click={rew}></button>
-  <button class="play-pause" class:playing on:click={togglePlay}></button>
-  <button class="ffw" on:click={ffw}></button>
-</div>
+    <div class="controls">
+      <button class="rew" on:click={rew}></button>
+      <button class="play-pause" class:playing on:click={togglePlay}></button>
+      <button class="ffw" on:click={ffw}></button>
+    </div>
+  </div>
+{:else}
+  <div
+    class="text condensed"
+    class:absolute={suspendCredits}
+    in:fadeAndScale={{ reference: ui, delay: 300, duration: 800, easing: quartInOut }}
+  >
+    <h4>Dear Jane (Letter to a Curator)</h4>
+    <p><b>Narration</b> Benny Nemer, Shea Lime, Timothy Rainey II</p>
+    <p><b>Choral</b> St. Olaf Chamber Singers, directed by Therees Tkach Hibbard</p>
+    <p>Jayden Browne, Michael Caraher, Logan Combs, Marisabel Cordova, Ruby Erickson, Alexander Famous, Roan Findley, Caroline Flaten, Sean Griswold, Daniel Haakenson, Noah Han, Cully Hauck, Nicholas Hinson, Maren Hrivnak, Sara Jensen, Aidan Kocur, Chris Kopits, Shae Lime, Austin Meyer, Will McIntyre, Annika Seager, Anna Seppa, Sarah Shapiro, Maddie Smoot, Julia Walter, Lacy Williams, Hermione Yim.</p>
+    <p><b>Sound Design</b> Johannes Malfatti</p>
+    <p><b>Narration</b> Recording Julien Creus (Paris), Douglas Hamilton (Northfield)</p>
+    <p><b>Boe Chapel Choral Recording</b> Jeffrey O’Donnell and Joshua Wyatt</p>
+  </div>
+{/if}
 
 <style>
 .controls {
@@ -100,7 +141,19 @@ function assignRetrievedTime (): void {
 
 .title {
   height: 7em;
-  margin-bottom: 0.5em;
+}
+
+h3, h4 {
+  text-align: center;
+}
+
+.text.condensed {
+  height: 60%;
+  will-change: opacity, height;
+}
+
+.absolute {
+  position: absolute;
 }
 
 button {
