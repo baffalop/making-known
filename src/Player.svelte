@@ -4,6 +4,7 @@ import { quartInOut } from 'svelte/easing'
 
 import { Piece, titleFor } from './types'
 import Timeline from './Timeline.svelte'
+import Credits from './Credits.svelte'
 import { fadeAndScale, ondestroy } from './transition'
 
 const skipInterval = 10
@@ -119,13 +120,7 @@ function assignRetrievedTime (): void {
     class:absolute={suspendCredits}
     in:fadeAndScale={{ reference: ui, delay: 300, duration: 800, easing: quartInOut }}
   >
-    <h4>Dear Jane (Letter to a Curator)</h4>
-    <p><b>Narration</b> Benny Nemer, Shea Lime, Timothy Rainey II</p>
-    <p><b>Choral</b> St. Olaf Chamber Singers, directed by Therees Tkach Hibbard</p>
-    <p>Jayden Browne, Michael Caraher, Logan Combs, Marisabel Cordova, Ruby Erickson, Alexander Famous, Roan Findley, Caroline Flaten, Sean Griswold, Daniel Haakenson, Noah Han, Cully Hauck, Nicholas Hinson, Maren Hrivnak, Sara Jensen, Aidan Kocur, Chris Kopits, Shae Lime, Austin Meyer, Will McIntyre, Annika Seager, Anna Seppa, Sarah Shapiro, Maddie Smoot, Julia Walter, Lacy Williams, Hermione Yim.</p>
-    <p><b>Sound Design</b> Johannes Malfatti</p>
-    <p><b>Narration</b> Recording Julien Creus (Paris), Douglas Hamilton (Northfield)</p>
-    <p><b>Boe Chapel Choral Recording</b> Jeffrey O’Donnell and Joshua Wyatt</p>
+    <Credits {piece} />
   </div>
 {/if}
 
@@ -141,10 +136,6 @@ function assignRetrievedTime (): void {
 
 .title {
   height: 7em;
-}
-
-h3, h4 {
-  text-align: center;
 }
 
 .text.condensed {
