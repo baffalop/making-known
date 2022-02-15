@@ -182,7 +182,7 @@ button.play-pause.playing {
   background-position: 50% 100%;
 }
 
-.playpause.playing.waiting {
+.play-pause.playing.waiting {
   animation: throb 2.3s infinite;
 }
 
