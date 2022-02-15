@@ -15,8 +15,8 @@ export let piece: Piece
   <h4>Sound Design</h4>
   <p>Johannes Malfatti</p>
 
-  <h4>Narration</h4>
-  <p>Recording Julien Creus (Paris), Douglas Hamilton (Northfield)</p>
+  <h4>Narration Recording</h4>
+  <p>Julien Creus (Paris), Douglas Hamilton (Northfield)</p>
 
   <h4>Boe Chapel Choral Recording</h4>
   <p>Jeffrey O’Donnell and Joshua Wyatt</p>
