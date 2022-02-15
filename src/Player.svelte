@@ -136,6 +136,7 @@ function assignRetrievedTime (): void {
 
 .title {
   height: 7em;
+  cursor: pointer;
 }
 
 .text.condensed {
