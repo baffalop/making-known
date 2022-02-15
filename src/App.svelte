@@ -29,7 +29,9 @@ let autoscrolling = false
 
 let carousel: HTMLElement
 let introText: HTMLElement
+let menu: HTMLElement
 let player: HTMLElement
+let scrollTarget: HTMLElement|null = null
 
 onMount(() => window.setTimeout(() => itsTimeToScrollToIntro = true, introScrollWaitTime))
 window.onload = () => loaded = true
@@ -65,10 +67,11 @@ const viewText = () => view = View.Text
 const viewPlayer = () => view = View.Player
 const viewMenu = () => {
   // the menu's red can flash by if autoscrolling past it from title on load
-  if (!autoscrolling) view = View.Menu
+  if (!autoscrolling || scrollTarget === menu) view = View.Menu
 }
 
 function scrollTo (target: HTMLElement, duration = 800) {
+  scrollTarget = target
   if (!isLegacySafari) autoscrolling = true
 
   window.requestAnimationFrame(
@@ -79,7 +82,10 @@ function scrollTo (target: HTMLElement, duration = 800) {
       easing: quartInOut,
       scrollX: true,
       scrollY: false,
-      onDone: () => autoscrolling = false,
+      onDone: () => {
+        scrollTarget = null
+        autoscrolling = false
+      },
     })
   )
 }
@@ -111,14 +117,18 @@ function scrollTo (target: HTMLElement, duration = 800) {
         Please put on your headphones, turn off the ringer of your device, and when you are ready, swipe right to select
         one of the audio letters of <em>The Making Known</em>.
       </p>
+
+      <p class="centred">
+        <button class="arrow right inline" on:click={() => scrollTo(menu)}>Forward</button>
+      </p>
     </div>
   </div>
 
-  <div class="centred slide" use:inview on:enter={viewMenu}>
+  <div class="centred slide" bind:this={menu} use:inview on:enter={viewMenu}>
     <Menu on:select={() => scrollTo(player)} />
   </div>
 
-  <div class="centred slide" use:inview on:enter={viewPlayer} bind:this={player}>
+  <div class="centred slide" bind:this={player} use:inview on:enter={viewPlayer}>
     <Player piece={currentPiece} isInView={view === View.Player} />
   </div>
 
@@ -222,5 +232,34 @@ h1 {
 .background.paul {
   background-image: url(img/bg-paul.jpeg);
   background-position: 0 0;
+}
+
+button.arrow {
+  width: 5em;
+  display: none;
+}
+
+button.arrow.left {
+  background-image: url(img/back.png);
+}
+
+button.arrow.right {
+  background-image: url(img/forward.png);
+}
+
+button.inline {
+  margin-top: 0.6em;
+}
+
+@media screen and (max-width: 800px) {
+  button.inline {
+    display: block;
+  }
+}
+
+@media (pointer: none) {
+  button.inline {
+    display: block;
+  }
 }
 </style>

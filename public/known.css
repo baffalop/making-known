@@ -33,3 +33,25 @@ a {
   text-decoration-thickness: 1px;
   text-underline-offset: 0.3ex;
 }
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  font-size: 100%;
+  border: 0;
+  outline: 0;
+  padding: 0;
+  height: 1.5em;
+  width: 1.75em;
+
+  color: transparent;
+  background: transparent no-repeat scroll;
+  background-size: contain;
+  transition: opacity 80ms ease-in 100ms;
+
+  cursor: pointer;
+}
+
+button:active {
+  transition: none;
+  opacity: 0.5;
+}

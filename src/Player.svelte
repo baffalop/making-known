@@ -169,22 +169,6 @@ function assignRetrievedTime (): void {
   position: absolute;
 }
 
-button {
-  -webkit-tap-highlight-color: transparent;
-  font-size: 100%;
-  border: 0;
-  outline: 0;
-  padding: 0;
-
-  background: transparent no-repeat scroll;
-  background-size: contain;
-  transition: opacity 80ms ease-in 100ms;
-
-  cursor: pointer;
-  height: 1.5em;
-  width: 1.75em;
-}
-
 button.play-pause {
   width: 8em;
   height: 2.5em;
@@ -216,10 +200,5 @@ button.rew {
   background-image: url(img/rew.png);
   opacity: 0.85;
   margin-top: 0.7em;
-}
-
-button:active {
-  transition: none;
-  opacity: 0.5;
 }
 </style>
