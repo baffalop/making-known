@@ -6,6 +6,8 @@ import { animateScroll } from 'svelte-scrollto-element'
 
 import sniffer from 'snifferjs'
 
+import titleImg from './img/title.png'
+
 import { View, Piece } from './types'
 import Menu from './Menu.svelte'
 import Player from './Player.svelte'
@@ -99,7 +101,7 @@ function scrollTo (target: HTMLElement, duration = 800) {
   on:enter={viewText}
 >
   <header class="centred slide" use:inview on:leave={() => userHasScrolled = true}>
-    <img class="title" src="img/title.png" alt="The Making Known" />
+    <img class="title" src={titleImg} alt="The Making Known" />
   </header>
 
   <div class="centred slide" bind:this={introText} use:inview on:enter={viewText}>
