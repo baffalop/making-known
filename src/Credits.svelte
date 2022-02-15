@@ -69,7 +69,6 @@ h4 {
   line-height: 1em;
   margin-block-end: 0.6em;
   font-style: italic;
-  font-weight: normal;
 }
 
 h4 + p {
