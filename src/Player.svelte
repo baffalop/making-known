@@ -17,6 +17,7 @@ let viewingCredits = false
 let currentTime = 0
 let paused = true
 let duration = 0
+let waiting = false
 
 $: playing = !paused
 $: progress = duration == 0 ? 0 : (retrievedTime ?? currentTime) / duration
@@ -103,6 +104,8 @@ function assignRetrievedTime (): void {
   bind:currentTime
   bind:paused
   bind:duration
+  on:waiting={() => waiting = true}
+  on:canplay={() => waiting = false}
   on:ended={() => window.setTimeout(() => viewingCredits = true, 1000)}
 ></audio>
 
@@ -125,7 +128,7 @@ function assignRetrievedTime (): void {
 
     <div class="controls">
       <button class="rew" on:click={rew}></button>
-      <button class="play-pause" class:playing on:click={togglePlay}></button>
+      <button class="play-pause" class:playing class:waiting on:click={togglePlay}></button>
       <button class="ffw" on:click={ffw}></button>
     </div>
   </div>
@@ -191,6 +194,16 @@ button.play-pause {
 
 button.play-pause.playing {
   background-position: 50% 100%;
+}
+
+.playpause.playing.waiting {
+  animation: throb 2.3s infinite;
+}
+
+@keyframes throb {
+  0%   { opacity: 1.0; }
+  50%  { opacity: 0.0; }
+  100% { opacity: 1.0; }
 }
 
 button.ffw {
