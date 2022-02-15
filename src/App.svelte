@@ -164,11 +164,6 @@ function scrollTo (target: HTMLElement, duration = 800) {
   display: flex;
 }
 
-.carousel.vertical {
-  scroll-snap-type: y mandatory;
-  flex-direction: column;
-}
-
 .carousel.horizontal {
   scroll-snap-type: x mandatory;
   flex-direction: row;
