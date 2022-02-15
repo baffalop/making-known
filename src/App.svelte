@@ -115,11 +115,7 @@ function scrollTo (target: HTMLElement, duration = 800) {
         The encounter takes form through three audio letters written by the artist to individuals of
         relevance to the preservation and interpretation of the posters and their twenty-first century
         meaning: a curator, a paper conservator, and a poet. Each letter lasts between fifteen and
-        twenty minutes.
-      </p>
-
-      <p>
-        Please put on your headphones, turn off the ringer of your device, and when you are
+        twenty minutes. Please put on your headphones, turn off the ringer of your device, and when you are
         ready, proceed to the menu to select one of the audio letters of <em>The Making Known</em>.
       </p>
 
