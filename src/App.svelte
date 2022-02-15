@@ -125,11 +125,12 @@ function scrollTo (target: HTMLElement, duration = 800) {
   <div class="centred slide" use:inview on:enter={viewText}>
     <div class="text">
       <p>
-        <em>The Making Known</em> was written and created by Benny Nemer to accompany a scenography of a flowers, paper
-        mobiles, and a selection of posters from the Tetlie Collection, which were exhibited in a solo exhibition with
-        the same title at the Flaten Art Museum in the winter of 2022. The project was commissioned by museum Director
-        and Curator Jane Becker Nelson with financial support from (Can’t Remember Right Now), and research and exhibition
-        assistance from Mona Weselman and Krista Anderson-Larson. Website programming by Nikita Gaidakov.
+        <em>The Making Known</em> was written and created by <a href="https://nemer.be" target="_blank">Benny Nemer</a>
+        to accompany a scenography of a flowers, paper mobiles, and a selection of posters from the Tetlie Collection,
+        which were exhibited in a solo exhibition with the same title at the Flaten Art Museum in the winter of 2022.
+        The project was commissioned by museum Director and Curator Jane Becker Nelson with financial support from
+        (Can’t Remember Right Now), and research and exhibition assistance from Mona Weselman and Krista Anderson-Larson.
+        Website programming by Nikita Gaidakov.
       </p>
     </div>
   </div>
