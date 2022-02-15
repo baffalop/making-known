@@ -237,7 +237,6 @@ h1 {
 
 button.arrow {
   width: 5em;
-  display: none;
 }
 
 button.arrow.left {
@@ -250,17 +249,5 @@ button.arrow.right {
 
 button.inline {
   margin-top: 0.6em;
-}
-
-@media screen and (max-width: 800px) {
-  button.inline {
-    display: block;
-  }
-}
-
-@media (pointer: none) {
-  button.inline {
-    display: block;
-  }
 }
 </style>
