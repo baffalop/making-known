@@ -130,8 +130,6 @@ function scrollTo (target: HTMLElement, duration = 800) {
         title at the Flaten Art Museum in the winter of 2022. The project was commissioned by museum Director and
         Curator Jane Becker Nelson with financial support from (Can’t Remember Right Now), and research and exhibition
         assistance from Mona Weselman and Krista Anderson-Larson. Website programming by Nikita Gaidakov.
-        More information about the project at
-        <a href="https://nemer.be/themakingknown" target="_blank">www.nemer.be/themakingknown</a>
       </p>
     </div>
   </div>
