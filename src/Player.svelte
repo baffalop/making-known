@@ -1,6 +1,6 @@
 <script lang="ts">
 import { fade } from 'svelte/transition'
-import { quartInOut } from 'svelte/easing'
+import { cubicInOut, quartInOut } from 'svelte/easing'
 
 import { Piece, titleFor } from './types'
 import Timeline from './Timeline.svelte'
@@ -43,9 +43,17 @@ $: {
 }
 
 // properties for the fadeAndScale transition
+const uiFadeDuration = 300
+const creditsFadeInDuration = 800
+const creditsFadeOutDuration = 600
+
 let ui: HTMLElement
+let uiHeight: number
+$: if (ui) uiHeight = parseFloat(getComputedStyle(ui).height.replace('px', ''))
 let suspendCredits = true
 $: if (!viewingCredits) suspendCredits = true
+let suspendUi = false
+$: if (viewingCredits) suspendUi = true
 
 function togglePlay (): void {
   paused = !paused
@@ -105,7 +113,13 @@ function assignRetrievedTime (): void {
 />
 
 {#if !viewingCredits}
-  <div out:fade={{ duration: 300 }} bind:this={ui} use:ondestroy={() => suspendCredits = false}>
+  <div
+    class:absolute={suspendUi}
+    bind:this={ui}
+    in:fade={{ duration: uiFadeDuration, delay: creditsFadeOutDuration }}
+    out:fade={{ duration: uiFadeDuration }}
+    use:ondestroy={() => suspendCredits = false}
+  >
     <Timeline {progress} {playing}/>
 
     <div class="controls">
@@ -118,7 +132,9 @@ function assignRetrievedTime (): void {
   <div
     class="text condensed"
     class:absolute={suspendCredits}
-    in:fadeAndScale={{ reference: ui, delay: 300, duration: 800, easing: quartInOut }}
+    in:fadeAndScale={{ reference: uiHeight, delay: uiFadeDuration, duration: creditsFadeInDuration, easing: quartInOut }}
+    out:fadeAndScale={{ reference: uiHeight, duration: creditsFadeOutDuration, easing: cubicInOut }}
+    use:ondestroy={() => suspendUi = false}
   >
     <Credits {piece} />
   </div>
