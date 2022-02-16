@@ -100,7 +100,7 @@ function assignRetrievedTime (): void {
 </script>
 
 <audio
-  src="/audio/{piece}.mp3"
+  src="audio/{piece}.mp3"
   bind:currentTime
   bind:paused
   bind:duration
@@ -110,7 +110,7 @@ function assignRetrievedTime (): void {
 ></audio>
 
 <img
-  src="/img/title-{piece}.png"
+  src="img/title-{piece}.png"
   alt={titleFor(piece)}
   class="title"
   on:click={() => viewingCredits = !viewingCredits}

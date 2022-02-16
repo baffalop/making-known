@@ -99,7 +99,7 @@ function scrollTo (target: HTMLElement, duration = 800) {
   on:enter={viewText}
 >
   <header class="centred slide" use:inview on:leave={() => userHasScrolled = true}>
-    <img class="title" src="/img/title.png" alt="The Making Known" />
+    <img class="title" src="img/title.png" alt="The Making Known" />
   </header>
 
   <div class="centred slide" bind:this={introText} use:inview on:enter={viewText}>
