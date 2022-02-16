@@ -77,7 +77,6 @@ button {
   height: 1.5em;
   width: 1.75em;
 
-  color: transparent;
   background: transparent no-repeat scroll;
   background-size: contain;
   transition: opacity 200ms ease-in-out 100ms;

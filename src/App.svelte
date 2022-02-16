@@ -128,7 +128,7 @@ function scrollTo (target: HTMLElement, { duration = 800, delay = 0 } = {}) {
       </p>
 
       <p class="centred">
-        <button class="arrow right inline" on:click={() => scrollTo(menu)}>Forward</button>
+        <button class="arrow right inline" on:click={() => scrollTo(menu)} title="forward"></button>
       </p>
     </div>
   </div>
