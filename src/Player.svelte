@@ -2,10 +2,6 @@
 import { fade } from 'svelte/transition'
 import { cubicInOut, quartInOut } from 'svelte/easing'
 
-import titleJane from './img/title-jane.png'
-import titleDianna from './img/title-dianna.png'
-import titlePaul from './img/title-paul.png'
-
 import { Piece, titleFor } from './types'
 import Timeline from './Timeline.svelte'
 import Credits from './Credits.svelte'
@@ -38,8 +34,6 @@ $: {
   paused = true
   viewingCredits = false
 }
-
-$: titleImg = titleImgFor(piece)
 
 $: {
   if (playing) {
@@ -103,18 +97,10 @@ function assignRetrievedTime (): void {
     retrievedTime = null
   }
 }
-
-function titleImgFor (piece: Piece): string {
-  switch (piece) {
-    case Piece.Jane: return titleJane
-    case Piece.Dianna: return titleDianna
-    case Piece.Paul: return titlePaul
-  }
-}
 </script>
 
 <audio
-  src="/audio/{piece}.mp3"
+  src="audio/{piece}.mp3"
   bind:currentTime
   bind:paused
   bind:duration
@@ -123,7 +109,12 @@ function titleImgFor (piece: Piece): string {
   on:ended={() => window.setTimeout(() => viewingCredits = true, 1000)}
 ></audio>
 
-<img src={titleImg} alt={titleFor(piece)} class="title" on:click={() => viewingCredits = !viewingCredits} />
+<img
+  src="img/title-{piece}.png"
+  alt={titleFor(piece)}
+  class="title"
+  on:click={() => viewingCredits = !viewingCredits}
+/>
 
 {#if !viewingCredits}
   <div
@@ -133,7 +124,7 @@ function titleImgFor (piece: Piece): string {
     out:fade={{ duration: uiFadeDuration }}
     use:ondestroy={() => suspendCredits = false}
   >
-    <Timeline {progress} {playing} />
+    <Timeline {progress} {playing}/>
 
     <div class="controls">
       <button class="rew" on:click={rew}>Rewind</button>
