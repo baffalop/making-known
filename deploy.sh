@@ -3,6 +3,10 @@
 # abort on errors
 set -e
 
+sed -i '' 's|base: '\''/'\''|base: '\''/making-known/'\''|' vite.config.ts
+
+exit
+
 # build
 pnpm build
 
