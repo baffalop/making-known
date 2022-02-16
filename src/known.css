@@ -33,7 +33,7 @@ body {
   --text-color: #ffebb1;
   color: var(--text-color);
 
-  background: #858a8d;
+  background: linear-gradient(190deg, #3e3c3c, 30%, #858a8d);
 
   font-size: calc(12pt + 1.25vmin);
 }
