@@ -7,7 +7,9 @@ import Timeline from './Timeline.svelte'
 import Credits from './Credits.svelte'
 import { fadeAndScale, ondestroy } from './transition'
 
-const skipInterval = 10
+const skipInterval = 10 // seconds
+const saveTimeIntervalDuration = 2000 // ms
+const saveTimeOffset = 5 // seconds
 
 export let piece: Piece
 export let isInView: boolean
@@ -41,6 +43,7 @@ $: {
     startTimeUpdate()
   } else {
     stopTimeUpdate()
+    storePlayPosition()
   }
 }
 
@@ -72,7 +75,8 @@ function rew (): void {
 }
 
 function storePlayPosition (): void {
-  window.localStorage.setItem(piece, currentTime.toString())
+  const timeToSave = Math.max(currentTime - saveTimeOffset, 0)
+  window.localStorage.setItem(piece, timeToSave.toString())
 }
 
 function retrievePlayPosition(piece: Piece): number|null {
@@ -81,7 +85,7 @@ function retrievePlayPosition(piece: Piece): number|null {
 }
 
 function startTimeUpdate (): void {
-  timeUpdateInterval = window.setInterval(storePlayPosition, 1000)
+  timeUpdateInterval = window.setInterval(storePlayPosition, saveTimeIntervalDuration)
 }
 
 function stopTimeUpdate(): void {
