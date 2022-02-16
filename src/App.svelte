@@ -187,11 +187,6 @@ function scrollTo (target: HTMLElement, duration = 800) {
   scroll-snap-align: center;
 }
 
-h1 {
-  text-align: center;
-  font-style: italic;
-}
-
 .title {
   max-height: 70%;
   max-width: 90%;
