@@ -40,9 +40,9 @@ $: if (loaded && itsTimeToScrollToIntro) introScroll()
 function introScroll () {
   if (!userHasScrolled) {
     if (navigatedPiece !== null) {
-      scrollTo(player, autoScrollSpeedSlow)
+      scrollTo(player, { duration: autoScrollSpeedSlow })
     } else {
-      scrollTo(introText, autoScrollSpeedSlow)
+      scrollTo(introText, { duration: autoScrollSpeedSlow })
     }
   }
 }
@@ -70,24 +70,28 @@ const viewMenu = () => {
   if (!autoscrolling || scrollTarget === menu) view = View.Menu
 }
 
-function scrollTo (target: HTMLElement, duration = 800) {
+function scrollTo (target: HTMLElement, { duration = 800, delay = 0 } = {}) {
   scrollTarget = target
   if (!isLegacySafari) autoscrolling = true
 
-  window.requestAnimationFrame(
-    () => animateScroll.scrollTo({
-      container: carousel,
-      element: target,
-      duration,
-      easing: quartInOut,
-      scrollX: true,
-      scrollY: false,
-      onDone: () => {
-        scrollTarget = null
-        autoscrolling = false
-      },
-    })
-  )
+  const action = () => animateScroll.scrollTo({
+    container: carousel,
+    element: target,
+    duration,
+    easing: quartInOut,
+    scrollX: true,
+    scrollY: false,
+    onDone: () => {
+      scrollTarget = null
+      autoscrolling = false
+    },
+  })
+
+  if (delay) {
+    window.setTimeout(action, delay)
+  } else {
+    window.requestAnimationFrame(action)
+  }
 }
 </script>
 
@@ -130,7 +134,7 @@ function scrollTo (target: HTMLElement, duration = 800) {
   </div>
 
   <div class="centred slide" bind:this={menu} use:inview on:enter={viewMenu}>
-    <Menu on:select={() => scrollTo(player)} />
+    <Menu on:select={() => scrollTo(player, { delay: 150 })} />
   </div>
 
   <div class="centred slide" bind:this={player} use:inview on:enter={viewPlayer}>
