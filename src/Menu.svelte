@@ -54,8 +54,8 @@ img {
 }
 
 .paul {
-  margin-top: 0.2em;
+  margin-top: -0.2em;
   margin-left: 0.6em;
-  height: 2.8em;
+  height: 2.9em;
 }
 </style>
