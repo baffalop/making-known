@@ -12,7 +12,7 @@ function select () {
 <ul>
   {#each [Piece.Jane, Piece.Dianna, Piece.Paul] as piece}
     <li>
-      <a href="#{piece}" on:click={select}>
+      <a class="button" href="#{piece}" on:click={select}>
         <img src="img/item-{piece}.png" alt={titleFor(piece)} class={piece} />
       </a>
     </li>
@@ -27,16 +27,6 @@ ul {
 
 img {
   height: 2.5em;
-}
-
-a {
-  -webkit-tap-highlight-color: transparent;
-  transition: opacity 120ms ease-in 150ms;
-}
-
-a:active {
-  transition: none;
-  opacity: 0.5;
 }
 
 .jane {

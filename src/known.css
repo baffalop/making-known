@@ -68,7 +68,7 @@ a {
   text-underline-offset: 0.3ex;
 }
 
-button {
+button, a.button {
   -webkit-tap-highlight-color: transparent;
   font-size: 100%;
   border: 0;
@@ -84,7 +84,7 @@ button {
   cursor: pointer;
 }
 
-button:active {
+button:active, a.button:active {
   transition: none;
   opacity: 0.5;
 }
