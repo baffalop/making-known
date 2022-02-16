@@ -99,7 +99,7 @@ function scrollTo (target: HTMLElement, duration = 800) {
   on:enter={viewText}
 >
   <header class="centred slide" use:inview on:leave={() => userHasScrolled = true}>
-    <img class="title" src="img/title.png" alt="The Making Known" />
+    <img class="title" src="/img/title.png" alt="The Making Known" />
   </header>
 
   <div class="centred slide" bind:this={introText} use:inview on:enter={viewText}>
@@ -220,17 +220,17 @@ h1 {
 }
 
 .background.jane {
-  background-image: url(img/bg-jane.jpeg);
+  background-image: url(/img/bg-jane.jpeg);
   background-position: 32% 0;
 }
 
 .background.dianna {
-  background-image: url(img/bg-dianna.jpeg);
+  background-image: url(/img/bg-dianna.jpeg);
   background-position: 80% 80%;
 }
 
 .background.paul {
-  background-image: url(img/bg-paul.jpeg);
+  background-image: url(/img/bg-paul.jpeg);
   background-position: 0 0;
 }
 
@@ -239,11 +239,11 @@ button.arrow {
 }
 
 button.arrow.left {
-  background-image: url(img/back.png);
+  background-image: url(/img/back.png);
 }
 
 button.arrow.right {
-  background-image: url(img/forward.png);
+  background-image: url(/img/forward.png);
 }
 
 button.inline {

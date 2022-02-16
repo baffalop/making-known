@@ -10,7 +10,7 @@ body {
 
   --text-color: #ffebb1;
   color: var(--text-color);
-  background: url(img/bg-main.jpeg) no-repeat 95% 75%;
+  background: url(/img/bg-main.jpeg) no-repeat 95% 75%;
   background-size: cover;
 
   font-size: calc(12pt + 1.25vmin);

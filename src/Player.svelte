@@ -100,7 +100,7 @@ function assignRetrievedTime (): void {
 </script>
 
 <audio
-  src="audio/{piece}.mp3"
+  src="/audio/{piece}.mp3"
   bind:currentTime
   bind:paused
   bind:duration
@@ -110,7 +110,7 @@ function assignRetrievedTime (): void {
 ></audio>
 
 <img
-  src="img/title-{piece}.png"
+  src="/img/title-{piece}.png"
   alt={titleFor(piece)}
   class="title"
   on:click={() => viewingCredits = !viewingCredits}
@@ -174,7 +174,7 @@ function assignRetrievedTime (): void {
 button.play-pause {
   width: 8em;
   height: 2.5em;
-  background-image: url(img/play-pause.png);
+  background-image: url(/img/play-pause.png);
   background-size: 100% auto;
 }
 
@@ -193,13 +193,13 @@ button.play-pause.playing {
 }
 
 button.ffw {
-  background-image: url(img/ffw.png);
+  background-image: url(/img/ffw.png);
   opacity: 0.85;
   margin-bottom: 0.7em;
 }
 
 button.rew {
-  background-image: url(img/rew.png);
+  background-image: url(/img/rew.png);
   opacity: 0.85;
   margin-top: 0.7em;
 }
