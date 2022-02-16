@@ -80,7 +80,7 @@ button {
   color: transparent;
   background: transparent no-repeat scroll;
   background-size: contain;
-  transition: opacity 120ms ease-in 150ms;
+  transition: opacity 200ms ease-in-out 100ms;
 
   cursor: pointer;
 }
