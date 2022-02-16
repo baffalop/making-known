@@ -151,7 +151,6 @@ function scrollTo (target: HTMLElement, duration = 800) {
   </div>
 
   <div class="background default" class:show={view === View.Text}></div>
-  <div class="background red" class:show={view === View.Menu}></div>
   <div class="background jane" class:show={view === View.Player && currentPiece === Piece.Jane}></div>
   <div class="background dianna" class:show={view === View.Player && currentPiece === Piece.Dianna}></div>
   <div class="background paul" class:show={view === View.Player && currentPiece === Piece.Paul}></div>
@@ -214,10 +213,6 @@ function scrollTo (target: HTMLElement, duration = 800) {
 .background.default {
   background-image: url(/img/bg-main.jpeg);
   background-position: 95% 75%;
-}
-
-.background.red {
-  background: #a6241d;
 }
 
 .background.jane {
