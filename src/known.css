@@ -4,12 +4,35 @@ html, body { /* disable scrolling */
   overflow: hidden;
 }
 
+@font-face {
+  font-family: 'GaramondBT';
+  src: url(/font/OriginalGaramondBT-Roman.otf);
+  font-style: normal;
+  font-weight: 300 500;
+}
+
+@font-face {
+  font-family: 'GaramondBT';
+  src: url(/font/OriginalGaramondBT-Italic.otf);
+  font-style: italic;
+  font-weight: 300 500;
+}
+
+@font-face {
+  font-family: 'GaramondBT';
+  src: url(/font/OriginalGaramondBT-BoldItalic.otf);
+  font-style: italic;
+  font-weight: 600 800;
+}
+
 body {
   -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
   -webkit-user-select: text;
 
+  font-family: 'GaramondBT', serif, system-ui, -apple-system, -apple-system-font;
   --text-color: #ffebb1;
   color: var(--text-color);
+
   background: url(/img/bg-main.jpeg) no-repeat 95% 75%;
   background-size: cover;
 
