@@ -3,8 +3,11 @@
 # abort on errors
 set -e
 
+sed -i '' 's:/font/:/making-known/font/:' index.html
+sed -i '' 's:/audio/:/making-known/audio/:' src/Player.svelte
+
 # build
-npm run build
+pnpm build
 
 # navigate into the build output directory
 cd dist
