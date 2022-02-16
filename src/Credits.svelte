@@ -23,7 +23,7 @@ export let piece: Piece
 
 {:else if piece === Piece.Dianna}
   <h4>Narration</h4>
-  <p>Benny Nemer, Shea Lime, Timothy Rainey II</p>
+  <p>Benny Nemer, Shae Lime, Timothy Rainey II</p>
 
   <h4>Interview</h4>
   <p>Dianna Clise</p>
