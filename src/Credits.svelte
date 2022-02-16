@@ -65,13 +65,14 @@ export let piece: Piece
 }
 
 h4 {
-  font-size: 1.2em;
-  line-height: 1em;
-  margin-block-end: 0.6em;
   font-style: italic;
+  font-weight: normal;
+  font-size: 1em;
+  line-height: 1.4em;
+  margin-block-end: 0;
 }
 
 h4 + p {
-  margin-block-start: 1ex;
+  margin-block-start: 0;
 }
 </style>
