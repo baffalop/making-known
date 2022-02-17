@@ -80,6 +80,10 @@ function rew (): void {
   storePlayPosition()
 }
 
+function onEnded (): void {
+  window.setTimeout(() => viewingCredits = true, 1000)
+}
+
 function storePlayPosition (): void {
   const timeToSave = Math.max(currentTime - saveTimeOffset, 0)
   window.localStorage.setItem(piece, timeToSave.toString())
@@ -133,7 +137,7 @@ function setMediaSession (piece: Piece) {
   bind:duration
   on:waiting={() => waiting = true}
   on:canplay={() => waiting = false}
-  on:ended={() => window.setTimeout(() => viewingCredits = true, 1000)}
+  on:ended={onEnded}
 ></audio>
 
 <img
