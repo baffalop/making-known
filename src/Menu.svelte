@@ -12,7 +12,7 @@ function select () {
 <ul>
   {#each [Piece.Jane, Piece.Dianna, Piece.Paul] as piece, i}
     <li style="--i: {i}">
-      <a href="#piece" on:click={select}><h4>{i + 1}</h4></a>
+      <h4>{i + 1}</h4>
 
       <a class="button" href="#{piece}" on:click={select}>
         <img src="img/item-{piece}.png" alt={titleFor(piece)} class={piece} />
@@ -25,10 +25,6 @@ function select () {
 ul {
   list-style: none;
   line-height: 1.5em;
-}
-
-a {
-  text-decoration: none;
 }
 
 h4 {
