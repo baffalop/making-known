@@ -35,6 +35,7 @@ $: {
   retrievedTime = retrievePlayPosition(piece)
   paused = true
   viewingCredits = false
+  setMediaSession(piece)
 }
 
 $: {
@@ -99,6 +100,23 @@ function assignRetrievedTime (): void {
   if (retrievedTime !== null) {
     currentTime = retrievedTime
     retrievedTime = null
+  }
+}
+
+function setMediaSession (piece: Piece) {
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: titleFor(piece),
+      album: 'The Making Known',
+      artwork: [96, 128, 192, 256, 384, 512].map(size => {
+        const sizes = `${size}x${size}`
+        return {
+          src: `img/album-art/album-${piece}-${sizes}.jpeg`,
+          sizes,
+          type: 'image/jpeg',
+        }
+      })
+    })
   }
 }
 </script>
