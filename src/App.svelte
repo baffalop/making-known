@@ -36,7 +36,7 @@ let creditsSlide: HTMLElement
 let player: HTMLElement & { select: () => void }
 
 let slides = []
-let viewingSlide: HTMLElement
+let viewingSlide: HTMLElement|null
 $: viewingPlayer = playerSlide && viewingSlide === playerSlide
 $: arrowsAreViewable = viewIsOnSlide && !autoscrolling && viewingSlide != null
 
