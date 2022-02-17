@@ -23,3 +23,5 @@ git commit -m 'deploy'
 git push -f https://github.com/baffalop/making-known.git gh-pages:gh-pages
 
 cd -
+
+git restore vite.config.ts
