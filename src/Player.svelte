@@ -219,15 +219,16 @@ button.play-pause.playing {
 
 button.ffw {
   background-image: url(/img/ffw.png);
+  margin-top: 0.7em;
 }
 
 button.rew {
   background-image: url(/img/rew.png);
+  margin-bottom: 0.7em;
 }
 
 button.ffw, button.rew {
   opacity: 0.85;
-  margin-bottom: 0.7em;
 }
 
 button.ffw:active, button.rew:active {
