@@ -2,6 +2,8 @@
 
 # abort on errors
 set -e
+# verbose
+set -x
 
 sed -i '' 's|base: '\''/'\''|base: '\''/making-known/'\''|' vite.config.ts
 
