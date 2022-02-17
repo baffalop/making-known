@@ -52,12 +52,14 @@ window.onload = () => loaded = true
 $: if (loaded && itsTimeToScrollToIntro) introScroll()
 
 function introScroll () {
-  if (!userHasScrolled) {
-    if (navigatedPiece !== null) {
-      scrollTo(playerSlide, { duration: autoScrollSpeedSlow })
-    } else {
-      scrollTo(introSlide, { duration: autoScrollSpeedSlow })
-    }
+  if (userHasScrolled) {
+    return
+  }
+
+  if (navigatedPiece !== null) {
+    scrollTo(playerSlide, { duration: autoScrollSpeedSlow })
+  } else {
+    scrollTo(introSlide, { duration: autoScrollSpeedSlow })
   }
 }
 
