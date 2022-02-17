@@ -7,7 +7,7 @@ specifiers:
   postcss: ^8.4.6
   snifferjs: ^4.1.0
   svelte: ^3.37.0
-  svelte-inview: ^2.1.1
+  svelte-intersection-observer: ^0.10.0
   svelte-preprocess: ^4.7.4
   svelte-scrollto-element: ^0.7.0
   typescript: ^4.3.5
@@ -18,7 +18,7 @@ specifiers:
 dependencies:
   snifferjs: 4.1.0
   svelte: 3.46.2
-  svelte-inview: 2.1.1_svelte@3.46.2
+  svelte-intersection-observer: 0.10.0
   svelte-scrollto-element: 0.7.0_svelte@3.46.2
 
 devDependencies:
@@ -2277,12 +2277,8 @@ packages:
       svelte: 3.46.2
     dev: true
 
-  /svelte-inview/2.1.1_svelte@3.46.2:
-    resolution: {integrity: sha512-eEDkcIddA/eYpMl4bDKwop+GP8vjzrxeVAAOlC/lz7FgsrSvJ5hxJGwLT7qwUy9adfXXA2bow/NKVURaOhskag==}
-    peerDependencies:
-      svelte: ^3.0.0
-    dependencies:
-      svelte: 3.46.2
+  /svelte-intersection-observer/0.10.0:
+    resolution: {integrity: sha512-GdOTMSrRpoBciMe+NbocsHOBvqKJ5OiL5H8Jz4mBoDGHba9VOI4oGeXAmMOmh8mi5gq95+0b0DVI+6alcQ7TCA==}
     dev: false
 
   /svelte-preprocess/4.10.1_0671a08c5a2bbbaffc1d0720bf6dc94e:

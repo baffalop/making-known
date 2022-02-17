@@ -1,12 +1,12 @@
 <script lang="ts">
 import { onMount } from 'svelte'
-import { inview as baseInview } from 'svelte-inview'
+import { fade } from 'svelte/transition'
 import { quartInOut } from 'svelte/easing'
 import { animateScroll } from 'svelte-scrollto-element'
-
+import IntersectionObserver from 'svelte-intersection-observer'
 import sniffer from 'snifferjs'
 
-import { View, Piece } from './types'
+import { Piece } from './types'
 import Menu from './Menu.svelte'
 import Player from './Player.svelte'
 
@@ -19,23 +19,35 @@ const sniffed = sniffer(navigator.userAgent)
 const isLegacySafari = (sniffed.os.name === 'ios' && sniffed.os.majorVersion < 15)
   || (sniffed.browser.name === 'safari' && sniffed.browser.majorVersion < 15)
 
-let view: View = View.Text
 let currentPiece: Piece = navigatedPiece || Piece.Jane
 
 let loaded = false
 let itsTimeToScrollToIntro = false
 let userHasScrolled = false
 let autoscrolling = false
+let viewIsOnSlide = true
 
 let carousel: HTMLElement
-let introText: HTMLElement
-let menu: HTMLElement
+let titleSlide: HTMLElement
+let introSlide: HTMLElement
+let menuSlide: HTMLElement
 let playerSlide: HTMLElement
+let creditsSlide: HTMLElement
 let player: HTMLElement & { select: () => void }
+
+let slides = []
+let viewingSlide: HTMLElement
+$: viewingPlayer = playerSlide && viewingSlide === playerSlide
+$: arrowsAreViewable = viewIsOnSlide && !autoscrolling && viewingSlide != null
 
 let scrollTarget: HTMLElement|null = null
 
-onMount(() => window.setTimeout(() => itsTimeToScrollToIntro = true, introScrollWaitTime))
+onMount(() => {
+  slides = [titleSlide, introSlide, menuSlide, playerSlide, creditsSlide]
+  viewingSlide = titleSlide
+  window.setTimeout(() => itsTimeToScrollToIntro = true, introScrollWaitTime)
+})
+
 window.onload = () => loaded = true
 $: if (loaded && itsTimeToScrollToIntro) introScroll()
 
@@ -44,7 +56,7 @@ function introScroll () {
     if (navigatedPiece !== null) {
       scrollTo(playerSlide, { duration: autoScrollSpeedSlow })
     } else {
-      scrollTo(introText, { duration: autoScrollSpeedSlow })
+      scrollTo(introSlide, { duration: autoScrollSpeedSlow })
     }
   }
 }
@@ -62,19 +74,9 @@ window.addEventListener('hashchange', () => {
   currentPiece = pieceFromHash() || Piece.Jane
 })
 
-// wrapper for inview action with my config defaults
-const inview = node => baseInview(node, { threshold: 0.8 })
-
-const viewText = () => view = View.Text
-const viewPlayer = () => view = View.Player
-const viewMenu = () => {
-  // the menu's red can flash by if autoscrolling past it from title on load
-  if (!autoscrolling || scrollTarget === menu) view = View.Menu
-}
-
 function scrollTo (target: HTMLElement, { duration = 800, delay = 0 } = {}) {
   scrollTarget = target
-  if (!isLegacySafari) autoscrolling = true
+  autoscrolling = true
 
   const action = () => animateScroll.scrollTo({
     container: carousel,
@@ -96,24 +98,51 @@ function scrollTo (target: HTMLElement, { duration = 800, delay = 0 } = {}) {
   }
 }
 
+function forward () {
+  navigate(1)
+}
+
+function back () {
+  navigate(-1)
+}
+
+function navigate (i: number) {
+  if (viewingSlide === null) {
+    return
+  }
+
+  const slideIndex = slides.indexOf(viewingSlide)
+  const target = slides[slideIndex + i]
+
+  if (target != null) {
+    scrollTo(target, { delay: 150 })
+  }
+}
+
 function handleSelect () {
   player.select()
   scrollTo(playerSlide, { delay: 150 })
 }
+
+function onSlideChange (slide: HTMLElement, { detail: { isIntersecting } }: { detail: IntersectionObserverEntry }) {
+  if (!userHasScrolled && slide !== titleSlide) {
+    return
+  }
+
+  viewIsOnSlide = isIntersecting
+
+  if (!isIntersecting) {
+    userHasScrolled = true
+  }
+}
 </script>
 
-<main
-  class="carousel horizontal"
-  class:snap={!autoscrolling}
-  bind:this={carousel}
-  use:inview
-  on:enter={viewText}
->
-  <header class="centred slide" use:inview on:leave={() => userHasScrolled = true}>
+<main class="carousel horizontal" class:snap={!autoscrolling || isLegacySafari} bind:this={carousel}>
+  <header class="centred slide" bind:this={titleSlide}>
     <img class="title" src="img/title.png" alt="The Making Known" />
   </header>
 
-  <div class="centred slide" bind:this={introText} use:inview on:enter={viewText}>
+  <div class="centred slide" bind:this={introSlide}>
     <div class="text">
       <p>
         This is a narrated encounter with posters designed by the Nazi German government to
@@ -135,20 +164,20 @@ function handleSelect () {
       </p>
 
       <p class="centred">
-        <button class="arrow right inline" on:click={() => scrollTo(menu)} title="forward"></button>
+        <button class="arrow right inline" on:click={() => scrollTo(menuSlide)} title="forward"></button>
       </p>
     </div>
   </div>
 
-  <div class="centred slide" bind:this={menu} use:inview on:enter={viewMenu}>
+  <div class="centred slide" bind:this={menuSlide}>
     <Menu on:select={handleSelect} />
   </div>
 
-  <div class="centred slide" bind:this={playerSlide} use:inview on:enter={viewPlayer}>
-    <Player piece={currentPiece} isInView={view === View.Player} bind:this={player} />
+  <div class="centred slide" bind:this={playerSlide}>
+    <Player piece={currentPiece} bind:this={player} />
   </div>
 
-  <div class="centred slide" use:inview on:enter={viewText}>
+  <div class="centred slide" bind:this={creditsSlide}>
     <div class="text">
       <p>
         <em>The Making Known</em> was written and created by <a href="https://nemer.be" target="_blank">Benny Nemer</a>
@@ -161,11 +190,24 @@ function handleSelect () {
     </div>
   </div>
 
-  <div class="background default" class:show={view === View.Text}></div>
-  <div class="background jane" class:show={view === View.Player && currentPiece === Piece.Jane}></div>
-  <div class="background dianna" class:show={view === View.Player && currentPiece === Piece.Dianna}></div>
-  <div class="background paul" class:show={view === View.Player && currentPiece === Piece.Paul}></div>
+  <div class="background default" class:show={[titleSlide, introSlide, creditsSlide, null].includes(viewingSlide)}></div>
+  <div class="background jane" class:show={viewingPlayer && currentPiece === Piece.Jane}></div>
+  <div class="background dianna" class:show={viewingPlayer && currentPiece === Piece.Dianna}></div>
+  <div class="background paul" class:show={viewingPlayer && currentPiece === Piece.Paul}></div>
 </main>
+
+{#each slides as slide}
+  <IntersectionObserver root={carousel} element={slide} threshold={0.96} on:observe={e => onSlideChange(slide, e)} />
+  <IntersectionObserver root={carousel} element={slide} threshold={0.8} on:intersect={() => viewingSlide = slide} />
+{/each}
+
+{#if arrowsAreViewable && [menuSlide, playerSlide, creditsSlide].includes(viewingSlide)}
+  <button class="arrow left side" on:click={back} title="back" in:fade={{ duration: 400 }} out:fade={{ duration: 150 }}></button>
+{/if}
+
+{#if arrowsAreViewable && [introSlide, playerSlide].includes(viewingSlide)}
+  <button class="arrow right side" on:click={forward} title="forward" in:fade={{ duration: 400 }} out:fade={{ duration: 150 }}></button>
+{/if}
 
 <style>
 .carousel {
@@ -255,5 +297,31 @@ button.arrow.right {
 
 button.inline {
   margin-top: 0.6em;
+}
+
+.arrow.side {
+  position: absolute;
+  bottom: 12%;
+  --margin: calc(10%);
+}
+
+@media (max-width: 870px) {
+  .arrow.side {
+    display: none;
+  }
+}
+
+@media (min-width: 870px) {
+  .arrow.inline {
+    display: none;
+  }
+}
+
+.arrow.side.left {
+  left: var(--margin);
+}
+
+.arrow.side.right {
+  right: var(--margin);
 }
 </style>
