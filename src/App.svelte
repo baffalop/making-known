@@ -30,7 +30,9 @@ let autoscrolling = false
 let carousel: HTMLElement
 let introText: HTMLElement
 let menu: HTMLElement
-let player: HTMLElement
+let playerSlide: HTMLElement
+let player: HTMLElement & { select: () => void }
+
 let scrollTarget: HTMLElement|null = null
 
 onMount(() => window.setTimeout(() => itsTimeToScrollToIntro = true, introScrollWaitTime))
@@ -40,7 +42,7 @@ $: if (loaded && itsTimeToScrollToIntro) introScroll()
 function introScroll () {
   if (!userHasScrolled) {
     if (navigatedPiece !== null) {
-      scrollTo(player, { duration: autoScrollSpeedSlow })
+      scrollTo(playerSlide, { duration: autoScrollSpeedSlow })
     } else {
       scrollTo(introText, { duration: autoScrollSpeedSlow })
     }
@@ -93,6 +95,11 @@ function scrollTo (target: HTMLElement, { duration = 800, delay = 0 } = {}) {
     window.requestAnimationFrame(action)
   }
 }
+
+function handleSelect () {
+  scrollTo(playerSlide, { delay: 150 })
+  player.select()
+}
 </script>
 
 <main
@@ -134,11 +141,11 @@ function scrollTo (target: HTMLElement, { duration = 800, delay = 0 } = {}) {
   </div>
 
   <div class="centred slide" bind:this={menu} use:inview on:enter={viewMenu}>
-    <Menu on:select={() => scrollTo(player, { delay: 150 })} />
+    <Menu on:select={handleSelect} />
   </div>
 
-  <div class="centred slide" bind:this={player} use:inview on:enter={viewPlayer}>
-    <Player piece={currentPiece} isInView={view === View.Player} />
+  <div class="centred slide" bind:this={playerSlide} use:inview on:enter={viewPlayer}>
+    <Player piece={currentPiece} isInView={view === View.Player} bind:this={player} />
   </div>
 
   <div class="centred slide" use:inview on:enter={viewText}>

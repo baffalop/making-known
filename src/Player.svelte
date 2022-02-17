@@ -16,6 +16,11 @@ export let isInView: boolean
 
 let viewingCredits = false
 
+// to handle the case of reselecting the same piece from the menu
+export function select (): void {
+  viewingCredits = false
+}
+
 let currentTime = 0
 let paused = true
 let duration = 0
