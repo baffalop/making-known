@@ -25,6 +25,8 @@ import legacy from '@vitejs/plugin-legacy';
 import autoprefixer from 'autoprefixer';
 import pkg from './package.json';
 import tsconfig from './tsconfig.json';
+import compressPng from 'vite-plugin-compress'
+import viteCompression from 'vite-plugin-compression'
 
 const production = process.env.NODE_ENV === 'production';
 const config = <UserConfig> defineConfig({
@@ -40,6 +42,12 @@ const config = <UserConfig> defineConfig({
 			// @ts-ignore This is temporary until the type definitions are fixed!
 			hot: !production
 		}),
+		compressPng({
+			brotli: false,
+			threshold: 10000,
+			verbose: true,
+		}),
+		viteCompression(),
 	],
 	server: {
 		host: 'localhost',
