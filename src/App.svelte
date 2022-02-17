@@ -97,8 +97,8 @@ function scrollTo (target: HTMLElement, { duration = 800, delay = 0 } = {}) {
 }
 
 function handleSelect () {
-  scrollTo(playerSlide, { delay: 150 })
   player.select()
+  scrollTo(playerSlide, { delay: 150 })
 }
 </script>
 
