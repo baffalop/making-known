@@ -319,7 +319,13 @@ button.inline {
   --margin: calc(10%);
 }
 
-@media (hover: hover) and (max-width: 1200px) {
+@media (max-width: 1200px) {
+  .arrow.side {
+    display: none;
+  }
+}
+
+@media (hover: none) {
   .arrow.side {
     display: none;
   }
