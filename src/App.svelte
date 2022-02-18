@@ -316,10 +316,10 @@ button.inline {
 .arrow.side {
   position: absolute;
   bottom: 12%;
-  --margin: calc(10%);
+  --margin: calc(22% - 6em);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
   .arrow.side {
     display: none;
   }
@@ -331,7 +331,7 @@ button.inline {
   }
 }
 
-@media (hover: hover) and (min-width: 1200px) {
+@media (hover: hover) and (min-width: 1000px) {
   .arrow.inline {
     display: none;
   }
