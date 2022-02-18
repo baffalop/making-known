@@ -117,7 +117,7 @@ function navigate (i: number) {
   const target = slides[slideIndex + i]
 
   if (target != null) {
-    scrollTo(target, { delay: 150 })
+    scrollTo(target)
   }
 }
 
