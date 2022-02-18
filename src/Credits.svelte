@@ -6,7 +6,7 @@ export let piece: Piece
 
 {#if piece === Piece.Jane}
   <h4>Narration</h4>
-  <p>Benny Nemer, Shea Lime, Timothy Rainey II</p>
+  <p>Benny Nemer, Shae Lime, Timothy Rainey II</p>
 
   <h4>Choral</h4>
   <p>St. Olaf Chamber Singers, directed by Therees Tkach Hibbard</p>
@@ -39,7 +39,7 @@ export let piece: Piece
 
 {:else if piece === Piece.Paul}
   <h4>Narration</h4>
-  <p>Benny Nemer, Shea Lime, Timothy Rainey II</p>
+  <p>Benny Nemer, Shae Lime, Timothy Rainey II</p>
 
   <h4>Choral</h4>
   <p>St. Olaf Chamber Singers, directed by Therees Tkach Hibbard</p>
