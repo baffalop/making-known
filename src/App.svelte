@@ -121,6 +121,16 @@ function navigate (i: number) {
   }
 }
 
+function onKeydown (e: KeyboardEvent) {
+  if (e.key === 'ArrowLeft') {
+    e.preventDefault()
+    back()
+  } else if (e.key === 'ArrowRight') {
+    e.preventDefault()
+    forward()
+  }
+}
+
 function handleSelect () {
   player.select()
   scrollTo(playerSlide, { delay: 150 })
@@ -210,6 +220,8 @@ function onSlideChange (slide: HTMLElement, { detail: { isIntersecting } }: { de
 {#if arrowsAreViewable && [introSlide, playerSlide].includes(viewingSlide)}
   <button class="arrow right side" on:click={forward} title="forward" in:fade={{ duration: 400 }} out:fade={{ duration: 150 }}></button>
 {/if}
+
+<svelte:body on:keydown={onKeydown} />
 
 <style>
 .carousel {
