@@ -1,14 +1,10 @@
 # The Making Known
 
-An audio guide artwork by [Benny Nemer](https://nemer.be).
+An audio guide artwork by [Benny Nemer](https://nemer.be), narrating an encounter with the Tetlie Collection of WWII Propaganda Posters at the Flaten Art Museum.
+
+Made with Svelte and built with Vite.
 
 ## Available Scripts
 
-#### `npm start`
-
-Runs the app in the development mode.
-Open http://localhost:8080 to view it in the browser.
-
-#### `npm run build`
-
-Outputs a static bundle to the `build/` folder.
+* `pnpm start`
+* `pnpm build`
