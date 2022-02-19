@@ -72,12 +72,24 @@ function pieceFromHash(): Piece|null {
   }
 }
 
+function clearHash () {
+  window.location.hash = '#'
+}
+
 window.addEventListener('hashchange', () => {
   const newPiece = pieceFromHash()
   if (newPiece !== null) {
     currentPiece = newPiece
   }
 })
+
+function viewSlide(slide: HTMLElement) {
+  if (viewingSlide === playerSlide && slide !== playerSlide) {
+    clearHash()
+  }
+
+  viewingSlide = slide
+}
 
 function scrollTo (target: HTMLElement, { duration = 800, delay = 0 } = {}) {
   scrollTarget = target
@@ -139,7 +151,7 @@ function handleSelect () {
   scrollTo(playerSlide, { delay: 150 })
 }
 
-function onSlideChange (slide: HTMLElement, { detail: { isIntersecting } }: { detail: IntersectionObserverEntry }) {
+function onSnap (slide: HTMLElement, { detail: { isIntersecting } }: { detail: IntersectionObserverEntry }) {
   if (!userHasScrolled && slide !== titleSlide) {
     return
   }
@@ -189,7 +201,7 @@ function onSlideChange (slide: HTMLElement, { detail: { isIntersecting } }: { de
   </div>
 
   <div class="centred slide" bind:this={playerSlide}>
-    <Player piece={currentPiece} bind:this={player} />
+    <Player piece={currentPiece} bind:this={player} on:ended={clearHash} />
   </div>
 
   <div class="centred slide" bind:this={creditsSlide}>
@@ -212,8 +224,8 @@ function onSlideChange (slide: HTMLElement, { detail: { isIntersecting } }: { de
 </main>
 
 {#each slides as slide}
-  <IntersectionObserver root={carousel} element={slide} threshold={0.96} on:observe={e => onSlideChange(slide, e)} />
-  <IntersectionObserver root={carousel} element={slide} threshold={0.8} on:intersect={() => viewingSlide = slide} />
+  <IntersectionObserver root={carousel} element={slide} threshold={0.96} on:observe={e => onSnap(slide, e)} />
+  <IntersectionObserver root={carousel} element={slide} threshold={0.8} on:intersect={() => viewSlide(slide)} />
 {/each}
 
 {#if arrowsAreViewable && [menuSlide, playerSlide, creditsSlide].includes(viewingSlide)}

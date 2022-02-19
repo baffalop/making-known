@@ -1,4 +1,5 @@
 <script lang="ts">
+import { createEventDispatcher } from 'svelte'
 import { fade } from 'svelte/transition'
 import { cubicInOut, quartInOut } from 'svelte/easing'
 
@@ -6,6 +7,8 @@ import { Piece, titleFor } from './types'
 import Timeline from './Timeline.svelte'
 import Credits from './Credits.svelte'
 import { fadeAndScale, ondestroy } from './transition'
+
+const dispatch = createEventDispatcher()
 
 const skipInterval = 10 // seconds
 const saveTimeIntervalDuration = 2000 // ms
@@ -82,7 +85,7 @@ function rew (): void {
 
 function onEnded (): void {
   window.setTimeout(() => viewingCredits = true, 1000)
-  window.location.hash = '#'
+  dispatch('ended')
 }
 
 function storePlayPosition (): void {
