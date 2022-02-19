@@ -10,15 +10,14 @@ import { Piece } from './types'
 import Menu from './Menu.svelte'
 import Player from './Player.svelte'
 
-const introScrollWaitTime = 2000
-const autoScrollSpeedSlow = 1400
-
-const navigatedPiece: Piece|null = pieceFromHash()
-
 const sniffed = sniffer(navigator.userAgent)
 const isLegacySafari = (sniffed.os.name === 'ios' && sniffed.os.majorVersion < 15)
   || (sniffed.browser.name === 'safari' && sniffed.browser.majorVersion < 15)
 
+const introScrollWaitTime = 2000
+const autoScrollSpeedSlow = 1400
+
+const navigatedPiece: Piece|null = pieceFromHash()
 let currentPiece: Piece = navigatedPiece || Piece.Jane
 
 let loaded = false
