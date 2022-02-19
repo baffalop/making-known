@@ -25,7 +25,7 @@ let loaded = false
 let itsTimeToScrollToIntro = false
 let userHasScrolled = false
 let autoscrolling = false
-let viewIsOnSlide = true
+let snappedToSlide = true
 
 let carousel: HTMLElement
 let titleSlide: HTMLElement
@@ -38,7 +38,7 @@ let player: HTMLElement & { select: () => void }
 let slides: HTMLElement[] = []
 let viewingSlide: HTMLElement|null
 $: viewingPlayer = playerSlide && viewingSlide === playerSlide
-$: arrowsAreViewable = viewIsOnSlide && !autoscrolling && viewingSlide != null
+$: arrowsAreViewable = snappedToSlide && !autoscrolling && viewingSlide != null
 
 onMount(() => {
   slides = [titleSlide, introSlide, menuSlide, playerSlide, creditsSlide]
@@ -116,7 +116,7 @@ function onSnap (slide: HTMLElement, { detail: { isIntersecting } }: { detail: I
     return
   }
 
-  viewIsOnSlide = isIntersecting
+  snappedToSlide = isIntersecting
 
   if (!isIntersecting) {
     userHasScrolled = true
