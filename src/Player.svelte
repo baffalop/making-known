@@ -82,6 +82,7 @@ function rew (): void {
 
 function onEnded (): void {
   window.setTimeout(() => viewingCredits = true, 1000)
+  window.location.hash = '#'
 }
 
 function storePlayPosition (): void {

@@ -35,7 +35,7 @@ let playerSlide: HTMLElement
 let creditsSlide: HTMLElement
 let player: HTMLElement & { select: () => void }
 
-let slides = []
+let slides: HTMLElement[] = []
 let viewingSlide: HTMLElement|null
 $: viewingPlayer = playerSlide && viewingSlide === playerSlide
 $: arrowsAreViewable = viewIsOnSlide && !autoscrolling && viewingSlide != null
@@ -73,7 +73,10 @@ function pieceFromHash(): Piece|null {
 }
 
 window.addEventListener('hashchange', () => {
-  currentPiece = pieceFromHash() || Piece.Jane
+  const newPiece = pieceFromHash()
+  if (newPiece !== null) {
+    currentPiece = newPiece
+  }
 })
 
 function scrollTo (target: HTMLElement, { duration = 800, delay = 0 } = {}) {
