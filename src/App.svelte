@@ -40,8 +40,6 @@ let viewingSlide: HTMLElement|null
 $: viewingPlayer = playerSlide && viewingSlide === playerSlide
 $: arrowsAreViewable = viewIsOnSlide && !autoscrolling && viewingSlide != null
 
-let scrollTarget: HTMLElement|null = null
-
 onMount(() => {
   slides = [titleSlide, introSlide, menuSlide, playerSlide, creditsSlide]
   viewingSlide = titleSlide
@@ -131,7 +129,6 @@ function handleSelect () {
 }
 
 function scrollTo (target: HTMLElement, { duration = 800, delay = 0 } = {}) {
-  scrollTarget = target
   autoscrolling = true
 
   const action = () => animateScroll.scrollTo({
@@ -142,7 +139,6 @@ function scrollTo (target: HTMLElement, { duration = 800, delay = 0 } = {}) {
     scrollX: true,
     scrollY: false,
     onDone: () => {
-      scrollTarget = null
       autoscrolling = false
     },
   })
