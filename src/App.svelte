@@ -63,19 +63,6 @@ function introScroll () {
   }
 }
 
-function pieceFromHash(): Piece|null {
-  switch (window.location.hash) {
-    case '#jane': return Piece.Jane
-    case '#dianna': return Piece.Dianna
-    case '#paul': return Piece.Paul
-    default: return null
-  }
-}
-
-function clearHash () {
-  window.location.hash = '#'
-}
-
 window.addEventListener('hashchange', () => {
   const newPiece = pieceFromHash()
   if (newPiece !== null) {
@@ -83,36 +70,16 @@ window.addEventListener('hashchange', () => {
   }
 })
 
+function clearHash () {
+  window.location.hash = '#'
+}
+
 function viewSlide(slide: HTMLElement) {
   if (viewingSlide === playerSlide && slide !== playerSlide) {
     clearHash()
   }
 
   viewingSlide = slide
-}
-
-function scrollTo (target: HTMLElement, { duration = 800, delay = 0 } = {}) {
-  scrollTarget = target
-  autoscrolling = true
-
-  const action = () => animateScroll.scrollTo({
-    container: carousel,
-    element: target,
-    duration,
-    easing: quartInOut,
-    scrollX: true,
-    scrollY: false,
-    onDone: () => {
-      scrollTarget = null
-      autoscrolling = false
-    },
-  })
-
-  if (delay) {
-    window.setTimeout(action, delay)
-  } else {
-    window.requestAnimationFrame(action)
-  }
 }
 
 function forward () {
@@ -146,11 +113,6 @@ function onKeydown (e: KeyboardEvent) {
   }
 }
 
-function handleSelect () {
-  player.select()
-  scrollTo(playerSlide, { delay: 150 })
-}
-
 function onSnap (slide: HTMLElement, { detail: { isIntersecting } }: { detail: IntersectionObserverEntry }) {
   if (!userHasScrolled && slide !== titleSlide) {
     return
@@ -160,6 +122,44 @@ function onSnap (slide: HTMLElement, { detail: { isIntersecting } }: { detail: I
 
   if (!isIntersecting) {
     userHasScrolled = true
+  }
+}
+
+function handleSelect () {
+  player.select()
+  scrollTo(playerSlide, { delay: 150 })
+}
+
+function scrollTo (target: HTMLElement, { duration = 800, delay = 0 } = {}) {
+  scrollTarget = target
+  autoscrolling = true
+
+  const action = () => animateScroll.scrollTo({
+    container: carousel,
+    element: target,
+    duration,
+    easing: quartInOut,
+    scrollX: true,
+    scrollY: false,
+    onDone: () => {
+      scrollTarget = null
+      autoscrolling = false
+    },
+  })
+
+  if (delay) {
+    window.setTimeout(action, delay)
+  } else {
+    window.requestAnimationFrame(action)
+  }
+}
+
+function pieceFromHash(): Piece|null {
+  switch (window.location.hash) {
+    case '#jane': return Piece.Jane
+    case '#dianna': return Piece.Dianna
+    case '#paul': return Piece.Paul
+    default: return null
   }
 }
 </script>
